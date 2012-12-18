@@ -1,0 +1,404 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Alpha_Kang	InonizationFormula.cpp	/^double Alpha_Kang(double E) {$/;"	f
+Alpha_MorrowAndLowke	InonizationFormula.cpp	/^double Alpha_MorrowAndLowke(double E, double N) {$/;"	f
+Alpha_Nikonov	InonizationFormula.cpp	/^double Alpha_Nikonov(double E, double P) {$/;"	f
+ApplyConnectingE	connectingdef.cpp	/^void ApplyConnectingE(const MyDataF t) {$/;"	f
+ApplyConnectingM	connectingdef.cpp	/^void ApplyConnectingM(const MyDataF t) {$/;"	f
+BOUNDDATA_H	bounddata.cpp	3;"	d	file:
+BOUNDDATA_H	bounddata.h	3;"	d
+BackupMyStruct	datastruct.cpp	/^int MyStruct::BackupMyStruct(const MyStruct &obj) {$/;"	f	class:MyStruct
+CELLS_INSIDE_I	microdef.h	47;"	d
+CELLS_INSIDE_S	microdef.h	48;"	d
+CFL_FACTOR	microdef.h	12;"	d
+CFL_factor	commondata.h	/^const MyDataF CFL_factor = CFL_FACTOR;$/;"	v
+CMur	connectingdef.cpp	/^MyDataF CMur;$/;"	v
+COMMOM_DATA_INCLUDE	commondata.cpp	4;"	d	file:
+COMMOM_DATA_INCLUDE	commondata.h	4;"	d
+COORDINATES	bounddata.cpp	27;"	d	file:
+COORDINATES	bounddata.h	27;"	d
+COURANT_FACTOR	microdef.h	11;"	d
+CStep	commondata.cpp	/^unsigned int CStep;$/;"	v
+CalculateDelay	connectingdef.cpp	/^void CalculateDelay(MyDataF IncAngle) {$/;"	f
+CapFields	updatefields.cpp	/^void CapFields(unsigned int step) {$/;"	f
+CaptData	datastruct.cpp	/^void MyStruct::CaptData(const unsigned num, unsigned p) {$/;"	f	class:MyStruct
+Cexe_yn	bounddata.cpp	/^COORDINATES Cexe_yn;$/;"	v
+Cexe_yp	bounddata.cpp	/^COORDINATES Cexe_yp;$/;"	v
+Cexhz	connectingdef.cpp	/^MyDataF Cexhz;$/;"	v
+Cexhz_yn	bounddata.cpp	/^COORDINATES Cexhz_yn;$/;"	v
+Cexhz_yp	bounddata.cpp	/^COORDINATES Cexhz_yp;$/;"	v
+Ceye_xn	bounddata.cpp	/^COORDINATES Ceye_xn;$/;"	v
+Ceye_xp	bounddata.cpp	/^COORDINATES Ceye_xp;$/;"	v
+Ceyhz	connectingdef.cpp	/^MyDataF Ceyhz;$/;"	v
+Ceyhz_xn	bounddata.cpp	/^COORDINATES Ceyhz_xn;$/;"	v
+Ceyhz_xp	bounddata.cpp	/^COORDINATES Ceyhz_xp;$/;"	v
+Cezxe_xn	bounddata.cpp	/^COORDINATES Cezxe_xn;$/;"	v
+Cezxe_xp	bounddata.cpp	/^COORDINATES Cezxe_xp;$/;"	v
+Cezxe_yn	bounddata.cpp	/^COORDINATES Cezxe_yn;$/;"	v
+Cezxe_yp	bounddata.cpp	/^COORDINATES Cezxe_yp;$/;"	v
+Cezxhy_xn	bounddata.cpp	/^COORDINATES Cezxhy_xn;$/;"	v
+Cezxhy_xp	bounddata.cpp	/^COORDINATES Cezxhy_xp;$/;"	v
+Cezxhy_yn	bounddata.cpp	/^COORDINATES Cezxhy_yn;$/;"	v
+Cezxhy_yp	bounddata.cpp	/^COORDINATES Cezxhy_yp;$/;"	v
+Cezye_xn	bounddata.cpp	/^COORDINATES Cezye_xn;$/;"	v
+Cezye_xp	bounddata.cpp	/^COORDINATES Cezye_xp;$/;"	v
+Cezye_yn	bounddata.cpp	/^COORDINATES Cezye_yn;$/;"	v
+Cezye_yp	bounddata.cpp	/^COORDINATES Cezye_yp;$/;"	v
+Cezyhx_xn	bounddata.cpp	/^COORDINATES Cezyhx_xn;$/;"	v
+Cezyhx_xp	bounddata.cpp	/^COORDINATES Cezyhx_xp;$/;"	v
+Cezyhx_yn	bounddata.cpp	/^COORDINATES Cezyhx_yn;$/;"	v
+Cezyhx_yp	bounddata.cpp	/^COORDINATES Cezyhx_yp;$/;"	v
+CheckStruct	datastruct.cpp	/^bool MyStruct::CheckStruct() {$/;"	f	class:MyStruct
+Chxez	connectingdef.cpp	/^MyDataF Chxez;$/;"	v
+Chxez_yn	bounddata.cpp	/^COORDINATES Chxez_yn;$/;"	v
+Chxez_yp	bounddata.cpp	/^COORDINATES Chxez_yp;$/;"	v
+Chxh_yn	bounddata.cpp	/^COORDINATES Chxh_yn;$/;"	v
+Chxh_yp	bounddata.cpp	/^COORDINATES Chxh_yp;$/;"	v
+Chyez	connectingdef.cpp	/^MyDataF Chyez;$/;"	v
+Chyez_xn	bounddata.cpp	/^COORDINATES Chyez_xn;$/;"	v
+Chyez_xp	bounddata.cpp	/^COORDINATES Chyez_xp;$/;"	v
+Chyh_xn	bounddata.cpp	/^COORDINATES Chyh_xn;$/;"	v
+Chyh_xp	bounddata.cpp	/^COORDINATES Chyh_xp;$/;"	v
+Chzex	connectingdef.cpp	/^MyDataF Chzex;$/;"	v
+Chzey	connectingdef.cpp	/^MyDataF Chzey;$/;"	v
+Chzxey_xn	bounddata.cpp	/^COORDINATES Chzxey_xn;$/;"	v
+Chzxey_xp	bounddata.cpp	/^COORDINATES Chzxey_xp;$/;"	v
+Chzxey_yn	bounddata.cpp	/^COORDINATES Chzxey_yn;$/;"	v
+Chzxey_yp	bounddata.cpp	/^COORDINATES Chzxey_yp;$/;"	v
+Chzxh_xn	bounddata.cpp	/^COORDINATES Chzxh_xn;$/;"	v
+Chzxh_xp	bounddata.cpp	/^COORDINATES Chzxh_xp;$/;"	v
+Chzxh_yn	bounddata.cpp	/^COORDINATES Chzxh_yn;$/;"	v
+Chzxh_yp	bounddata.cpp	/^COORDINATES Chzxh_yp;$/;"	v
+Chzyex_xn	bounddata.cpp	/^COORDINATES Chzyex_xn;$/;"	v
+Chzyex_xp	bounddata.cpp	/^COORDINATES Chzyex_xp;$/;"	v
+Chzyex_yn	bounddata.cpp	/^COORDINATES Chzyex_yn;$/;"	v
+Chzyex_yp	bounddata.cpp	/^COORDINATES Chzyex_yp;$/;"	v
+Chzyh_xn	bounddata.cpp	/^COORDINATES Chzyh_xn;$/;"	v
+Chzyh_xp	bounddata.cpp	/^COORDINATES Chzyh_xp;$/;"	v
+Chzyh_yn	bounddata.cpp	/^COORDINATES Chzyh_yn;$/;"	v
+Chzyh_yp	bounddata.cpp	/^COORDINATES Chzyh_yp;$/;"	v
+ClearSim	datastruct.cpp	/^void MyStruct::ClearSim() {$/;"	f	class:MyStruct
+CloseEngine	datastruct.cpp	/^int MyStruct::CloseEngine() {$/;"	f	class:MyStruct
+CourantFactor	commondata.h	/^const MyDataF CourantFactor = COURANT_FACTOR;$/;"	v
+CreateFields	initials.cpp	/^void CreateFields() {$/;"	f
+CreatePMLArrays	pmlbound.cpp	/^bool CreatePMLArrays(unsigned int ncx, unsigned int ncy) {$/;"	f
+CreatePMLCoeffients	pmlbound.cpp	/^bool CreatePMLCoeffients(unsigned int ncx, unsigned int ncy) {$/;"	f
+CreateStruct	datastruct.cpp	/^int MyStruct::CreateStruct(const MyStruct &stru) {$/;"	f	class:MyStruct
+CreateStruct	datastruct.cpp	/^int MyStruct::CreateStruct(const MyStruct &stru, MyDataF initVal) {$/;"	f	class:MyStruct
+CreateStruct	datastruct.cpp	/^int MyStruct::CreateStruct(unsigned nnx, unsigned nny) {$/;"	f	class:MyStruct
+CreateStruct	datastruct.cpp	/^int MyStruct::CreateStruct(unsigned nnx, unsigned nny, MyDataF initVal) {$/;"	f	class:MyStruct
+CurTime	commondata.cpp	/^MyDataF CurTime; \/\/current time$/;"	v
+DATASTRUCT_H	datastruct.h	27;"	d
+DD	fdtdloop.cpp	4;"	d	file:
+DEN_TIME_STEPS	microdef.h	18;"	d
+DTF_VI_LIMIT	microdef.h	41;"	d
+D_kasi_max	commondata.cpp	/^MyDataF D_kasi_max;$/;"	v
+Da	commondata.cpp	/^MyDataF Da;$/;"	v
+De	commondata.cpp	/^MyDataF De;$/;"	v
+Deff	commondata.cpp	/^MyStruct Deff, Niu_i, Niu_a;$/;"	v
+Deff_Store_Index_x	commondata.cpp	/^unsigned Deff_Store_Index_x[10], Deff_Store_Index_y[10];$/;"	v
+Deff_Store_Index_y	commondata.cpp	/^unsigned Deff_Store_Index_x[10], Deff_Store_Index_y[10];$/;"	v
+DensityBound	updatedensity.cpp	/^void DensityBound(MyStruct stru, int bndwidth, const int swidth) {$/;"	f
+Density_Time_Step	commondata.h	/^const unsigned Density_Time_Step = DEN_TIME_STEPS;$/;"	v
+Dexb	connectingdef.cpp	/^MyDataF *Deyl, *Dexb, *Dext, *Deyr, *Dhzl, *Dhzr, *Dhzt, *Dhzb;$/;"	v
+Dext	connectingdef.cpp	/^MyDataF *Deyl, *Dexb, *Dext, *Deyr, *Dhzl, *Dhzr, *Dhzt, *Dhzb;$/;"	v
+Deyl	connectingdef.cpp	/^MyDataF *Deyl, *Dexb, *Dext, *Deyr, *Dhzl, *Dhzr, *Dhzt, *Dhzb;$/;"	v
+Deyr	connectingdef.cpp	/^MyDataF *Deyl, *Dexb, *Dext, *Deyr, *Dhzl, *Dhzr, *Dhzt, *Dhzb;$/;"	v
+Dhzb	connectingdef.cpp	/^MyDataF *Deyl, *Dexb, *Dext, *Deyr, *Dhzl, *Dhzr, *Dhzt, *Dhzb;$/;"	v
+Dhzl	connectingdef.cpp	/^MyDataF *Deyl, *Dexb, *Dext, *Deyr, *Dhzl, *Dhzr, *Dhzt, *Dhzb;$/;"	v
+Dhzr	connectingdef.cpp	/^MyDataF *Deyl, *Dexb, *Dext, *Deyr, *Dhzl, *Dhzr, *Dhzt, *Dhzb;$/;"	v
+Dhzt	connectingdef.cpp	/^MyDataF *Deyl, *Dexb, *Dext, *Deyr, *Dhzl, *Dhzr, *Dhzt, *Dhzb;$/;"	v
+E0	commondata.cpp	/^MyDataF E0, H0;$/;"	v
+E_0	microdef.h	30;"	d
+Ei	connectingdef.cpp	/^MyDataF *Ei, *Hi;$/;"	v
+ElectricEnergy	updatefields.h	/^inline MyDataF ElectricEnergy(unsigned im, unsigned jm) {$/;"	f
+EndSimulation	matlabsim.cpp	/^void EndSimulation() {$/;"	f
+Eta_Kang	InonizationFormula.cpp	/^double Eta_Kang(double E) {$/;"	f
+Eta_MorrowAndLowke	InonizationFormula.cpp	/^double Eta_MorrowAndLowke(double E, double N) {$/;"	f
+Eta_Nikonov	InonizationFormula.cpp	/^double Eta_Nikonov(double E, double P) {$/;"	f
+Ex0	commondata.cpp	/^MyDataF Hx0, Hz0, Hy0, Ez0, Ex0, Ey0;$/;"	v
+Ey	commondata.cpp	/^MyStruct Ey;$/;"	v
+Ey0	commondata.cpp	/^MyDataF Hx0, Hz0, Hy0, Ez0, Ex0, Ey0;$/;"	v
+Ez0	commondata.cpp	/^MyDataF Hx0, Hz0, Hy0, Ez0, Ex0, Ey0;$/;"	v
+Ezx_xn	bounddata.cpp	/^COORDINATES Ezx_xn;$/;"	v
+Ezx_xp	bounddata.cpp	/^COORDINATES Ezx_xp;$/;"	v
+Ezx_yn	bounddata.cpp	/^COORDINATES Ezx_yn;$/;"	v
+Ezx_yp	bounddata.cpp	/^COORDINATES Ezx_yp;$/;"	v
+Ezy_xn	bounddata.cpp	/^COORDINATES Ezy_xn;$/;"	v
+Ezy_xp	bounddata.cpp	/^COORDINATES Ezy_xp;$/;"	v
+Ezy_yn	bounddata.cpp	/^COORDINATES Ezy_yn;$/;"	v
+Ezy_yp	bounddata.cpp	/^COORDINATES Ezy_yp;$/;"	v
+FDTDLOOP_H	fdtdloop.h	2;"	d
+FILEINTERP_H	FileInterp.h	9;"	d
+FINE_GRID_SIZE	microdef.h	24;"	d
+FREEDATA_H	freedata.h	2;"	d
+FREQUENCY	microdef.h	33;"	d
+FileInterp	FileInterp.cpp	/^FileInterp::FileInterp(const FileInterp& orig) {$/;"	f	class:FileInterp
+FileInterp	FileInterp.cpp	/^FileInterp::FileInterp(int nv, const string &filex, const string &filey)$/;"	f	class:FileInterp
+FileInterp	FileInterp.h	/^class FileInterp : public Interpolation {$/;"	c
+FreeDelayArrays	connectingdef.cpp	/^void FreeDelayArrays() {$/;"	f
+FreePMLSpace	pmlbound.cpp	/^void FreePMLSpace() {$/;"	f
+FreeStructData	datastruct.cpp	/^void MyStruct::FreeStructData() {$/;"	f	class:MyStruct
+GasDen	commondata.cpp	/^MyDataF GasDen = 2.7e25;$/;"	v
+H0	commondata.cpp	/^MyDataF E0, H0;$/;"	v
+Hi	connectingdef.cpp	/^MyDataF *Ei, *Hi;$/;"	v
+Hx0	commondata.cpp	/^MyDataF Hx0, Hz0, Hy0, Ez0, Ex0, Ey0;$/;"	v
+Hy0	commondata.cpp	/^MyDataF Hx0, Hz0, Hy0, Ez0, Ex0, Ey0;$/;"	v
+Hz	commondata.cpp	/^MyStruct Hz;$/;"	v
+Hz0	commondata.cpp	/^MyDataF Hx0, Hz0, Hy0, Ez0, Ex0, Ey0;$/;"	v
+Hzx_xn	bounddata.cpp	/^COORDINATES Hzx_xn;$/;"	v
+Hzx_xp	bounddata.cpp	/^COORDINATES Hzx_xp;$/;"	v
+Hzx_yn	bounddata.cpp	/^COORDINATES Hzx_yn;$/;"	v
+Hzx_yp	bounddata.cpp	/^COORDINATES Hzx_yp;$/;"	v
+Hzy_xn	bounddata.cpp	/^COORDINATES Hzy_xn;$/;"	v
+Hzy_xp	bounddata.cpp	/^COORDINATES Hzy_xp;$/;"	v
+Hzy_yn	bounddata.cpp	/^COORDINATES Hzy_yn;$/;"	v
+Hzy_yp	bounddata.cpp	/^COORDINATES Hzy_yp;$/;"	v
+INC_ANGLE	microdef.h	35;"	d
+INC_SIZE	connectingdef.h	19;"	d
+INIT_DATA_INCLUDE	initials.h	4;"	d
+InitBreakDownParam	initials.cpp	/^void InitBreakDownParam() {$/;"	f
+InitCoeff	initials.cpp	/^void InitCoeff() {$/;"	f
+InitComData	initials.cpp	/^void InitComData() {$/;"	f
+InitConnectingInterface	connectingdef.cpp	/^void InitConnectingInterface(MyDataF IncAngle) {$/;"	f
+InitDomain	initials.cpp	/^void InitDomain() {$/;"	f
+InitEleDen	initials.cpp	/^void InitEleDen() {$/;"	f
+InitFDTDProblem	initials.cpp	/^void InitFDTDProblem(const string &fname) {$/;"	f
+InitMatlabEngine	datastruct.cpp	/^int MyStruct::InitMatlabEngine() {$/;"	f	class:MyStruct
+InitMatlabEngine	matlabsim.cpp	/^void InitMatlabEngine() {$/;"	f
+InitPMLCoefficients	pmlbound.cpp	/^void InitPMLCoefficients() {$/;"	f
+InitPlot	datastruct.cpp	/^void MyStruct::InitPlot() {$/;"	f	class:MyStruct
+InitStoreIndex	initials.cpp	/^void InitStoreIndex(){$/;"	f
+InitStructData	datastruct.cpp	/^void MyStruct::InitStructData(MyDataF initVal) {$/;"	f	class:MyStruct
+Initial	initials.cpp	/^void Initial(const string &fname) {$/;"	f
+InitialPML	pmlbound.cpp	/^void InitialPML(unsigned ncpml, unsigned ncx, unsigned ncy) {$/;"	f
+Interp	FileInterp.h	/^    double Interp(double vx) {$/;"	f	class:FileInterp
+InterpUe	updatedensity.cpp	/^void InterpUe(unsigned InterStep) {$/;"	f
+Interpolation	interp.h	/^class Interpolation \/\/七次拉格朗日插值$/;"	c
+IsAnySidePML	bounddata.cpp	/^int IsAnySidePML = 0;$/;"	v
+IsPMLxn	bounddata.cpp	/^int IsPMLxn = 0;$/;"	v
+IsPMLxp	bounddata.cpp	/^int IsPMLxp = 0;$/;"	v
+IsPMLyn	bounddata.cpp	/^int IsPMLyn = 0;$/;"	v
+IsPMLyp	bounddata.cpp	/^int IsPMLyp = 0;$/;"	v
+IsTEz	commondata.cpp	/^int IsTEz;$/;"	v
+IsTMz	commondata.cpp	/^int IsTMz;$/;"	v
+LEAPSTEP_OF_CAPTURE	microdef.h	42;"	d
+LEAPSTEP_OF_DISPLAY	microdef.h	40;"	d
+Linear_interpolation	interp.cpp	/^double Interpolation::Linear_interpolation(double const *x, double const *y, int n, double t) {$/;"	f	class:Interpolation
+MATLAB_SIM_H	matlabsim.h	3;"	d
+MAXWELL_MESH_SIZE	microdef.h	14;"	d
+MAX_ITER	connectingdef.cpp	58;"	d	file:
+MAX_LIMIT	microdef.h	9;"	d
+MAX_NE	microdef.h	34;"	d
+MICRODEF_H	microdef.h	3;"	d
+MTimeStep	fdtdloop.cpp	/^unsigned int MTimeStep = 1, MultiSize;$/;"	v
+MatlabSimulation	matlabsim.cpp	/^void MatlabSimulation() {$/;"	f
+MultiSize	fdtdloop.cpp	/^unsigned int MTimeStep = 1, MultiSize;$/;"	v
+MyArray	datastruct.h	/^    mxArray *MyArray;$/;"	m	class:MyStruct
+MyDataF	datastruct.h	/^typedef double MyDataF;$/;"	t
+MyStruct	datastruct.cpp	/^MyStruct::MyStruct(const MyStruct& obj) : data(NULL) {$/;"	f	class:MyStruct
+MyStruct	datastruct.cpp	/^MyStruct::MyStruct(unsigned cx, unsigned cy)$/;"	f	class:MyStruct
+MyStruct	datastruct.h	/^class MyStruct {$/;"	c
+NE0	microdef.h	31;"	d
+NE_MAX_LIMIT	microdef.h	10;"	d
+NUMBER_OF_CELLS_IN_PML_BOUND	microdef.h	15;"	d
+NUMBER_OF_WAVELENGTHS_IN_DOMAIN	microdef.h	17;"	d
+NUMCELLPERWAVELEN	microdef.h	13;"	d
+Ne	commondata.cpp	/^MyStruct Ne; \/\/density field component$/;"	v
+Niu_Kang	InonizationFormula.cpp	/^void Niu_Kang(double *pNiu_i, double *pNiu_a, double E) {$/;"	f
+Niu_MorrowAndLowke	InonizationFormula.cpp	/^void Niu_MorrowAndLowke(double *pNiu_i, double *pNiu_a, double E, double N) {$/;"	f
+Niu_Nikonov	InonizationFormula.cpp	/^void Niu_Nikonov(double *pNiu_i, double *pNiu_a, double E, double P) {$/;"	f
+Niu_a	commondata.cpp	/^MyStruct Deff, Niu_i, Niu_a;$/;"	v
+Niu_a_Kang	InonizationFormula.cpp	/^double Niu_a_Kang(double E) {$/;"	f
+Niu_a_MorrowAndLowke	InonizationFormula.cpp	/^double Niu_a_MorrowAndLowke(double E, double N) {$/;"	f
+Niu_a_Nikonov	InonizationFormula.cpp	/^double Niu_a_Nikonov(double E, double P) {$/;"	f
+Niu_i	commondata.cpp	/^MyStruct Deff, Niu_i, Niu_a;$/;"	v
+Niu_i_Kang	InonizationFormula.cpp	/^double Niu_i_Kang(double E) {$/;"	f
+Niu_i_MorrowAndLowke	InonizationFormula.cpp	/^double Niu_i_MorrowAndLowke(double E, double N) {$/;"	f
+Niu_i_Nikonov	InonizationFormula.cpp	/^double Niu_i_Nikonov(double E, double P) {$/;"	f
+NumOfCellPerWaveLen	commondata.cpp	/^unsigned NumOfCellPerWaveLen;$/;"	v
+NumOfWaveLength	commondata.cpp	/^unsigned NumOfWaveLength;$/;"	v
+Number	datastruct.h	/^    int Number;$/;"	m	class:MyStruct
+OpenFiles	initials.cpp	/^void OpenFiles()$/;"	f
+PMLBOUND_H	pmlbound.h	3;"	d
+PMLCellxn	bounddata.cpp	/^unsigned int PMLCellxn = 0;$/;"	v
+PMLCellxp	bounddata.cpp	/^unsigned int PMLCellxp = 0;$/;"	v
+PMLCellyn	bounddata.cpp	/^unsigned int PMLCellyn = 0;$/;"	v
+PMLCellyp	bounddata.cpp	/^unsigned int PMLCellyp = 0;$/;"	v
+PULSE_LENGGTH_IN_TIME	microdef.h	23;"	d
+Pex	commondata.cpp	/^MyStruct Pex; \/\/Ey at previous step$/;"	v
+Pey	commondata.cpp	/^MyStruct Pey; \/\/Ey at previous step$/;"	v
+PhaseVelRatio	connectingdef.cpp	/^MyDataF PhaseVelRatio(MyDataF angle) {$/;"	f
+PlotArrays	datastruct.cpp	/^void MyStruct::PlotArrays() {$/;"	f	class:MyStruct
+PlotStep	commondata.cpp	/^unsigned PlotStep;$/;"	v
+Pne	commondata.cpp	/^MyStruct Pne; \/\/Density Ne at previous step$/;"	v
+PrintData	datastruct.cpp	/^void MyStruct::PrintData() {$/;"	f	class:MyStruct
+PrintParam	initials.cpp	/^void PrintParam() {$/;"	f
+Ratio_x	commondata.cpp	/^MyDataF Ratio_x, Ratio_y;$/;"	v
+Ratio_y	commondata.cpp	/^MyDataF Ratio_x, Ratio_y;$/;"	v
+ResetStructData	datastruct.cpp	/^int MyStruct::ResetStructData(MyDataF Val) {$/;"	f	class:MyStruct
+SAVE_ERMS_LEAP	microdef.h	22;"	d
+SAVE_LEAP	microdef.h	21;"	d
+SCATTERED_FORMATION	microdef.h	25;"	d
+SCATTER_FIELD_DOMAIN_BND_SIZE	microdef.h	16;"	d
+SD	fdtdloop.cpp	103;"	d	file:
+SD	fdtdloop.cpp	3;"	d	file:
+SD	fdtdloop.h	19;"	d
+SOURCES_SIZE	microdef.h	51;"	d
+SOURCE_POS_IN_X	microdef.h	50;"	d
+SOURCE_POS_IN_Y	microdef.h	49;"	d
+SaveData	datastruct.cpp	/^void MyStruct::SaveData(unsigned leap) {$/;"	f	class:MyStruct
+SetName	datastruct.h	/^    void SetName(const std::string &sn){name = sn;}$/;"	f	class:MyStruct
+Source	connectingdef.cpp	/^MyDataF Source(MyDataF t) {$/;"	f
+Step	fdtdloop.cpp	/^unsigned int Step = 0;$/;"	v
+StoreOpt4	updatedensity.cpp	/^void StoreOpt4(unsigned i, unsigned j, MyDataF opt2, MyDataF opt4) {$/;"	f
+SumErms	updatefields.cpp	/^void SumErms() {$/;"	f
+T	commondata.cpp	/^MyDataF T; \/\/$/;"	v
+TOTAL_TIME	microdef.h	20;"	d
+TotalTime	commondata.cpp	/^MyDataF TotalTime; \/\/in nane seconds$/;"	v
+TotalTimeStep	commondata.cpp	/^unsigned TotalTimeStep;$/;"	v
+UPDATEFIELDS_H	updatefields.h	10;"	d
+Ue	commondata.cpp	/^MyStruct Ue; \/\/$/;"	v
+UpdEltFldForPML_TEz	pmlbound.cpp	/^void UpdEltFldForPML_TEz(MyStruct &ez, const MyStruct hx, const MyStruct &hy) {$/;"	f
+UpdEltFldForPML_TMz	pmlbound.cpp	/^void UpdEltFldForPML_TMz(MyStruct &ex, MyStruct &ey, const MyStruct &hz) {$/;"	f
+UpdMagFldForPML_TEz	pmlbound.cpp	/^void UpdMagFldForPML_TEz(MyStruct &hx, MyStruct &hy, const MyStruct &ez) {$/;"	f
+UpdMagFldForPML_TMz	pmlbound.cpp	/^void UpdMagFldForPML_TMz(MyStruct &hz, const MyStruct &ex, const MyStruct &ey) {$/;"	f
+UpdateConnectingE	connectingdef.cpp	/^void UpdateConnectingE(const MyDataF t) {$/;"	f
+UpdateConnectingM	connectingdef.cpp	/^void UpdateConnectingM(const MyDataF t) {$/;"	f
+UpdateDenDeff	updatedensity.cpp	/^void UpdateDenDeff() {$/;"	f
+UpdateDensity	updatedensity.cpp	/^void UpdateDensity() {$/;"	f
+UpdateDensityOther	updatedensity.cpp	/^void UpdateDensityOther() {$/;"	f
+UpdateEField	updatefields.cpp	/^void UpdateEField() {$/;"	f
+UpdateEFieldForPML	pmlbound.cpp	/^void UpdateEFieldForPML(MyStruct &ex, MyStruct &ey, MyStruct &ez, const MyStruct &hx, const MyStruct &hy, const MyStruct &hz) {$/;"	f
+UpdateErms	updatefields.cpp	/^void UpdateErms() {$/;"	f
+UpdateMField	updatefields.cpp	/^void UpdateMField() {$/;"	f
+UpdateMFieldForPML	pmlbound.cpp	/^void UpdateMFieldForPML(MyStruct &hx, MyStruct &hy, MyStruct &hz, const MyStruct &ex, const MyStruct &ey, const MyStruct &ez) {$/;"	f
+UpdateUCoeffiecients	updatefields.cpp	/^void UpdateUCoeffiecients() {$/;"	f
+UpdateUField	updatefields.cpp	/^void UpdateUField() {$/;"	f
+UpdateUeField	updatedensity.cpp	/^void UpdateUeField() {$/;"	f
+Ux	commondata.cpp	/^MyStruct Ux;$/;"	v
+Uy	commondata.cpp	/^MyStruct Uy;$/;"	v
+Vp_ratio	connectingdef.cpp	/^MyDataF Vp_ratio; \/\/phase velocity ratio$/;"	v
+We_Kang	InonizationFormula.cpp	/^double We_Kang(double E) {$/;"	f
+We_MorrowAndLowke	InonizationFormula.cpp	/^double We_MorrowAndLowke(double E, double N) {$/;"	f
+We_Nikonov	InonizationFormula.cpp	/^double We_Nikonov(double E, double P) {$/;"	f
+_CRT_SECURE_NO_WARNINGS	datastruct.cpp	27;"	d	file:
+_SOURCE_TEX_	microdef.h	28;"	d
+_SOURCE_TMX_	microdef.h	27;"	d
+_USE_MATH_DEFINES	connectingdef.cpp	9;"	d	file:
+_USE_MATH_DEFINES	connectingdef.h	10;"	d
+_USE_MATH_DEFINES	initials.cpp	3;"	d	file:
+_USE_MATH_DEFINES	microdef.h	4;"	d
+__CONNECTING_H__	connectingdef.h	8;"	d
+arrCount	commondata.cpp	/^const int arrCount = 3700;$/;"	v
+boundPMLdef	pmlbound.cpp	/^void boundPMLdef(unsigned ncpml) {$/;"	f
+c	commondata.h	/^const MyDataF c = 2.998E8;$/;"	v
+ceihi	connectingdef.cpp	/^MyDataF ceihi;$/;"	v
+cexhz	commondata.cpp	/^MyDataF cexhz, cexux; \/\/coefficients updating Ex$/;"	v
+cexux	commondata.cpp	/^MyDataF cexhz, cexux; \/\/coefficients updating Ex$/;"	v
+ceyhz	commondata.cpp	/^MyDataF ceyhz, ceyuy; \/\/coefficients updating Ey$/;"	v
+ceyuy	commondata.cpp	/^MyDataF ceyhz, ceyuy; \/\/coefficients updating Ey$/;"	v
+chiei	connectingdef.cpp	/^MyDataF chiei;$/;"	v
+chzex	commondata.cpp	/^MyDataF chzex, chzey; \/\/coefficients updating Hz$/;"	v
+chzey	commondata.cpp	/^MyDataF chzex, chzey; \/\/coefficients updating Hz$/;"	v
+closeFiles	freedata.h	/^void closeFiles(){$/;"	f
+cnt	datastruct.cpp	/^int MyStruct::cnt = 0;$/;"	m	class:MyStruct	file:
+cnt	datastruct.h	/^    static int cnt;$/;"	m	class:MyStruct
+cos_phi	connectingdef.cpp	/^MyDataF cos_phi;$/;"	v
+data	datastruct.h	/^    MyDataF** data;$/;"	m	class:MyStruct
+deff_file	commondata.cpp	/^std::ofstream deff_file;$/;"	v
+delays	connectingdef.cpp	/^MyDataF delays(MyDataF px, MyDataF py) {$/;"	f
+denFormula	commondata.cpp	/^int denFormula;$/;"	v
+denfile	commondata.cpp	/^std::ofstream denfile;$/;"	v
+ds_F	commondata.cpp	/^MyDataF ds_F, ds_M;$/;"	v
+ds_M	commondata.cpp	/^MyDataF ds_F, ds_M;$/;"	v
+ds_Pow_2	commondata.cpp	/^MyDataF ds_Pow_2; \/\/ds_F*ds_F$/;"	v
+dt	commondata.cpp	/^MyDataF dt, dt_F, dt_M;$/;"	v
+dt2	commondata.cpp	/^MyDataF dt2; \/\/dt*2$/;"	v
+dt_F	commondata.cpp	/^MyDataF dt, dt_F, dt_M;$/;"	v
+dt_M	commondata.cpp	/^MyDataF dt, dt_F, dt_M;$/;"	v
+dt_ds2_2	commondata.cpp	/^MyDataF dt_ds2_2; \/\/2*dt\/ds_F\/ds_F$/;"	v
+dt_me_e	commondata.cpp	/^MyDataF dt_me_e; \/\/dt*e\/me$/;"	v
+dt_me_e_2	commondata.cpp	/^MyDataF dt_me_e_2; \/\/dt*e\/me*2$/;"	v
+dx	commondata.cpp	/^MyDataF dx;$/;"	v
+dy	commondata.cpp	/^MyDataF dy;$/;"	v
+e	commondata.h	/^const MyDataF e = 1.602e-19;$/;"	v
+eilen	connectingdef.cpp	/^int eilen, hilen;$/;"	v
+ep	datastruct.cpp	/^Engine* MyStruct::ep = NULL;$/;"	m	class:MyStruct	file:
+ep	datastruct.h	/^    static Engine *ep;$/;"	m	class:MyStruct
+eps_0	commondata.h	/^const MyDataF eps_0 = 8.854e-12;$/;"	v
+eps_m_e_miu	commondata.cpp	/^MyDataF eps_m_e_miu; \/\/eps_0 \/ (e * (mu_e + mu_i))$/;"	v
+f	commondata.cpp	/^MyDataF f; \/\/frequency$/;"	v
+fdtdloop	fdtdloop.cpp	/^void fdtdloop() {$/;"	f
+freedata	freedata.h	/^void freedata()$/;"	f
+half_dt	commondata.cpp	/^MyDataF half_dt;$/;"	v
+hilen	connectingdef.cpp	/^int eilen, hilen;$/;"	v
+k	commondata.cpp	/^MyDataF k; \/\/$/;"	v
+lamda	commondata.cpp	/^MyDataF lamda;$/;"	v
+length	commondata.h	/^const MyDataF length = 1.0;$/;"	v
+lg3	interp.cpp	/^double Interpolation::lg3(double const *x, double const *y, int n, double t) {$/;"	f	class:Interpolation
+lgr	interp.cpp	/^double Interpolation::lgr(double const *lgrx, double const *lgry, int lgrn, double lgrt) {$/;"	f	class:Interpolation
+m	commondata.cpp	/^unsigned m, m2;$/;"	v
+m2	commondata.cpp	/^unsigned m, m2;$/;"	v
+main	main.cpp	/^int main(int argc, char **argv) {$/;"	f
+maxSI	commondata.cpp	/^unsigned minSI, minSJ, maxSI, maxSJ;$/;"	v
+maxSJ	commondata.cpp	/^unsigned minSI, minSJ, maxSI, maxSJ;$/;"	v
+me	commondata.h	/^const MyDataF me = 9.110e-31;$/;"	v
+midi	commondata.cpp	/^unsigned midi, midj, pci;$/;"	v
+midj	commondata.cpp	/^unsigned midi, midj, pci;$/;"	v
+minSI	commondata.cpp	/^unsigned minSI, minSJ, maxSI, maxSJ;$/;"	v
+minSJ	commondata.cpp	/^unsigned minSI, minSJ, maxSI, maxSJ;$/;"	v
+mu_0	commondata.h	/^const MyDataF mu_0 = 1.257e-6;$/;"	v
+mu_e	commondata.cpp	/^MyDataF mu_e;$/;"	v
+mu_i	commondata.cpp	/^MyDataF mu_i;$/;"	v
+n	FileInterp.h	/^    int n;$/;"	m	class:FileInterp
+name	datastruct.h	/^    std::string name;$/;"	m	class:MyStruct
+nbound	commondata.cpp	/^unsigned nbound;$/;"	v
+num	datastruct.h	/^    mxArray *num;$/;"	m	class:MyStruct
+nx	commondata.cpp	/^unsigned nx, nxp1, nxm1;$/;"	v
+nx	datastruct.h	/^    unsigned int nx;$/;"	m	class:MyStruct
+nxm1	commondata.cpp	/^unsigned nx, nxp1, nxm1;$/;"	v
+nxp1	commondata.cpp	/^unsigned nx, nxp1, nxm1;$/;"	v
+ny	commondata.cpp	/^unsigned ny, nyp1, nym1;$/;"	v
+ny	datastruct.h	/^    unsigned int ny;$/;"	m	class:MyStruct
+nym1	commondata.cpp	/^unsigned ny, nyp1, nym1;$/;"	v
+nyp1	commondata.cpp	/^unsigned ny, nyp1, nym1;$/;"	v
+omega	commondata.cpp	/^MyDataF omega;$/;"	v
+operator =	datastruct.cpp	/^void MyStruct::operator = (MyStruct const &other){$/;"	f	class:MyStruct
+p	commondata.cpp	/^MyDataF p = 760.0;$/;"	v
+pMyDataF	datastruct.h	/^typedef double* pMyDataF;$/;"	t
+pci	commondata.cpp	/^unsigned midi, midj, pci;$/;"	v
+phi	commondata.cpp	/^MyDataF phi; \/\/incidence wave inject angle on x-axis$/;"	v
+pie	bounddata.cpp	/^unsigned int pis, pie;$/;"	v
+pis	bounddata.cpp	/^unsigned int pis, pie;$/;"	v
+pje	bounddata.cpp	/^unsigned int pjs, pje;$/;"	v
+pjs	bounddata.cpp	/^unsigned int pjs, pje;$/;"	v
+pml_R_0	bounddata.cpp	/^MyDataF pml_R_0 = 1e-8;$/;"	v
+pml_order	bounddata.cpp	/^int pml_order = 2;$/;"	v
+ppne	commondata.cpp	/^MyStruct ppne;$/;"	v
+printf	datastruct.h	34;"	d
+rei	commondata.cpp	/^MyDataF rei = -1.0;$/;"	v
+savedata	freedata.h	/^void savedata()$/;"	f
+scatwidth	commondata.cpp	/^unsigned scatwidth;$/;"	v
+sign	InonizationFormula.cpp	/^int sign(double val) {$/;"	f
+sin_phi	connectingdef.cpp	/^MyDataF sin_phi;$/;"	v
+tail	datastruct.cpp	/^string MyStruct::tail = ".dat";$/;"	m	class:MyStruct	file:
+tail	datastruct.h	/^    static std::string tail;$/;"	m	class:MyStruct
+tpie	connectingdef.cpp	/^unsigned tpie;$/;"	v
+tpis	connectingdef.cpp	/^unsigned tpis;$/;"	v
+tpje	connectingdef.cpp	/^unsigned tpje;$/;"	v
+tpjs	connectingdef.cpp	/^unsigned tpjs;$/;"	v
+updateDeff	updatedensity.cpp	/^void updateDeff() {$/;"	f
+vm	commondata.h	/^const MyDataF vm = 760 * 5.3e9;$/;"	v
+x	FileInterp.h	/^    double *x;$/;"	m	class:FileInterp
+xe	connectingdef.cpp	/^int xe;$/;"	v
+xs	connectingdef.cpp	/^int xs;$/;"	v
+y	FileInterp.h	/^    double *y;$/;"	m	class:FileInterp
+ye	connectingdef.cpp	/^int ye;$/;"	v
+ys	connectingdef.cpp	/^int ys;$/;"	v
+~FileInterp	FileInterp.cpp	/^FileInterp::~FileInterp() {$/;"	f	class:FileInterp
+~MyStruct	datastruct.cpp	/^MyStruct::~MyStruct() {$/;"	f	class:MyStruct
