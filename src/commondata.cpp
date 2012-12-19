@@ -119,4 +119,6 @@ unsigned Deff_Store_Index_x[10], Deff_Store_Index_y[10];
 unsigned minSI, minSJ, maxSI, maxSJ;
 unsigned midi, midj, pci;
 
+int ifWithDensity=0;// if with density or not
+
 #endif

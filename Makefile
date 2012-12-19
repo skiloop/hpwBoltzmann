@@ -1,13 +1,13 @@
 CXX = g++
-CXXFLAGS = -g -D_DEBUG -Wall #-DMATLAB_SIMULATION 
-#CXXFLAGS = -O3 -Wall #-DMATLAB_SIMULATION 
+#CXXFLAGS = -g -D_DEBUG -Wall #-DMATLAB_SIMULATION 
+CXXFLAGS = -O3 -Wall -DMATLAB_SIMULATION 
 LFLAGS = -g -O3
 SRC=src
-MATLAB_ROOT=/opt/MATLAB/R2011a
+MATLAB_ROOT=/opt/Matlab/R2011a
 MATLAB_LIB=$(MATLAB_ROOT)/bin/glnxa64
 MATLAB_INC=$(MATLAB_ROOT)/extern/include
-#INC= -I$(MATLAB_INC)
-#LIB= -L$(MATLAB_LIB) -leng -lmx -Wl,-rpath-link $(MATLAB_LIB)
+INC= -I$(MATLAB_INC)
+LIB= -L$(MATLAB_LIB) -leng -lmx -Wl,-rpath-link $(MATLAB_LIB)
 COBJS = datastruct.o commondata.o
 OBJS = main.o $(COBJS) bounddata.o\
 connectingdef.o matlabsim.o \

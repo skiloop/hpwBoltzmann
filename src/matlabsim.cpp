@@ -12,8 +12,10 @@ void MatlabSimulation() {
     Hz.PlotArrays();
     Ex.PlotArrays();
     Ey.PlotArrays();
-    Ue.PlotArrays();
-    Ne.PlotArrays();
+    if(ifWithDensity) {
+        Ue.PlotArrays();
+        Ne.PlotArrays();
+    }
 
 }
 
@@ -24,8 +26,10 @@ void EndSimulation() {
     Ex.ClearSim();
     Ey.ClearSim();
     Hz.ClearSim();
-    Ne.ClearSim();
-    Ue.ClearSim();
+    if(ifWithDensity) {
+        Ne.ClearSim();
+        Ue.ClearSim();
+    }
 }
 
 void InitMatlabEngine() {
@@ -36,6 +40,9 @@ void InitMatlabEngine() {
     Ex.InitPlot();
     Ey.InitPlot();
     Hz.InitPlot();
-    Ne.InitPlot();
-    Ue.InitPlot();
+    if(ifWithDensity) {
+        Ne.InitPlot();
+        Ue.InitPlot();
+    }
 }
+

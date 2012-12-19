@@ -109,6 +109,6 @@ extern std::ofstream deff_file;
 extern unsigned Deff_Store_Index_x[10],Deff_Store_Index_y[10];
 extern unsigned minSI,minSJ,maxSI,maxSJ;
 extern unsigned midi,midj,pci;
-
+extern int ifWithDensity; // if with density or not
 #endif
 

@@ -9,6 +9,7 @@
 #include <math.h>
 #include <cstdio>
 #include <cstdlib>
+#include <iomanip>
 
 
 #include "datastruct.h"
@@ -149,7 +150,10 @@ void UpdateDensityOther() {
     unsigned ci = 0, cj = 0;
     MyDataF maxvi = 0, va_maxvi = 0, ne_maxvi = 0;
     MyDataF neij, kasi, gamma1 = 0, gamma2 = 0, down = 1;
-    MyDataF mvi = 0, mva = 0, mga1 = 0, mga2 = 0, meps = 0, mneij = 0, mue = 0, opt1 = 0, opt2 = 0, opt3 = 0;
+    MyDataF mvi = 0, mva = 0, mga1 = 0, mga2 = 0;
+    MyDataF mue = 0, mneij = 0;
+    MyDataF meps = 0;
+    MyDataF opt1 = 0, opt2 = 0, opt3 = 0;
 
     if (denFormula == 2)
         ppne = Pne;
@@ -224,8 +228,8 @@ void UpdateDensityOther() {
     }
 
     DensityBound(Ne, m*tpis, 0);
-    denfile << maxne << '\t' << minne << '\t' << maxvi << '\t' << ne_maxvi << '\t' << va_maxvi << '\t' << ci << '\t' << cj << endl;
-    cout << maxne << '\t' << minne << '\t' << maxvi << '\t' << ne_maxvi << '\t' << va_maxvi << '\t' << ci << '\t' << cj << '\t' << meps << '\t';
+    denfile << setiosflags(ios_base::scientific)<<maxne << '\t' << minne << '\t' << maxvi << '\t' << ne_maxvi << '\t' << va_maxvi << '\t' << ci << '\t' << cj << endl;
+    cout << setiosflags(ios_base::scientific)<<maxne << '\t' << minne << '\t' << maxvi << '\t' << ne_maxvi << '\t' << va_maxvi << '\t' << ci << '\t' << cj << '\t' << meps << '\t';
     /*
         cout << endl;
         cout << "meps\t" << meps << endl;

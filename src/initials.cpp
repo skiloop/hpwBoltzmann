@@ -14,61 +14,61 @@
 
 using namespace std;
 
-void InitStoreIndex(){
-	ifstream cfile("cdeff.txt");
-	if(!cfile.is_open()){
-		cerr<<"Cannot open file cdeff.txt!"<<endl;
-		exit(-1);
-	}
-	try{	
-		MyDataF cx,cy;
-		unsigned c = 0;
-		cout<<"Read Capture files..."<<endl;
-		minSI = Ne.nx;
-		minSJ = Ne.ny;
-		maxSI = 0;
-		maxSJ = 0;
+void InitStoreIndex() {
+    ifstream cfile("cdeff.txt");
+    if(!cfile.is_open()) {
+        cerr<<"Cannot open file cdeff.txt!"<<endl;
+        exit(-1);
+    }
+    try {
+        MyDataF cx,cy;
+        unsigned c = 0;
+        cout<<"Read Capture files..."<<endl;
+        minSI = Ne.nx;
+        minSJ = Ne.ny;
+        maxSI = 0;
+        maxSJ = 0;
 
-		while(cfile.good()&&c<10)
-		{
-			cfile>>cx>>cy;
-			Deff_Store_Index_x[c] = (cx-1.5)*lamda/ds_F+midi;
-			Deff_Store_Index_y[c] = (cy-1.5)*lamda/ds_F+midj;
-			cout<<c<<'\t'<<Deff_Store_Index_x[c]<<'\t'<<Deff_Store_Index_y[c]<<endl;
+        while(cfile.good()&&c<10)
+        {
+            cfile>>cx>>cy;
+            Deff_Store_Index_x[c] = (cx-1.5)*lamda/ds_F+midi;
+            Deff_Store_Index_y[c] = (cy-1.5)*lamda/ds_F+midj;
+            cout<<c<<'\t'<<Deff_Store_Index_x[c]<<'\t'<<Deff_Store_Index_y[c]<<endl;
 
-			//计算保存区域下标的范围
-			if(minSI>Deff_Store_Index_x[c])minSI=Deff_Store_Index_x[c];
-			if(minSJ>Deff_Store_Index_y[c])minSJ=Deff_Store_Index_y[c];
-			if(maxSI<Deff_Store_Index_x[c])maxSI=Deff_Store_Index_x[c];
-			if(maxSJ<Deff_Store_Index_y[c])maxSJ=Deff_Store_Index_y[c];
+            //计算保存区域下标的范围
+            if(minSI>Deff_Store_Index_x[c])minSI=Deff_Store_Index_x[c];
+            if(minSJ>Deff_Store_Index_y[c])minSJ=Deff_Store_Index_y[c];
+            if(maxSI<Deff_Store_Index_x[c])maxSI=Deff_Store_Index_x[c];
+            if(maxSJ<Deff_Store_Index_y[c])maxSJ=Deff_Store_Index_y[c];
 
-			c++;
-		}
-		cout<<"MinSI\tMinSJ\tMaxSI\t\tMaxSJ\t"<<endl;
-		cout<<minSI<<'\t'<<minSJ<<'\t'<<maxSI<<'\t'<<maxSJ<<endl;
-		cfile.close();
-	}catch(exception &e){
-		cerr<<"Caught exception "<<e.what()<<endl;
-		cfile.close();
-		exit(-1);
-	}
+            c++;
+        }
+        cout<<"MinSI\tMinSJ\tMaxSI\t\tMaxSJ\t"<<endl;
+        cout<<minSI<<'\t'<<minSJ<<'\t'<<maxSI<<'\t'<<maxSJ<<endl;
+        cfile.close();
+    } catch(exception &e) {
+        cerr<<"Caught exception "<<e.what()<<endl;
+        cfile.close();
+        exit(-1);
+    }
 }
 void OpenFiles()
 {
     denfile.open("resdata/den.dat");
     if (!denfile.is_open()) {
         cerr << "open denfile failed!" << endl;
-        exit(-1);    
-	}else cout<<"denfile is opened"<<endl;
+        exit(-1);
+    } else cout<<"denfile is opened"<<endl;
     deff_file.open("resdata/deff.dat");
-    if (!deff_file.is_open()){
+    if (!deff_file.is_open()) {
         cerr << "open denfile failed!" << endl;
         exit(-1);
-    }else cout<<"deff file is opened"<<endl;
+    } else cout<<"deff file is opened"<<endl;
 }
 /*
- * @brief Initial Problem Domain 
- * 
+ * @brief Initial Problem Domain
+ *
  */
 void InitDomain() {
 
@@ -94,7 +94,7 @@ void InitDomain() {
 
 /*
  * @brief Initial FDTD problem
- * 
+ *
  */
 void InitFDTDProblem(const string &fname) {
 
@@ -110,7 +110,7 @@ void InitFDTDProblem(const string &fname) {
         }
         try {
             cout << "========================<Read Paremeters From File>===========================" << endl;
-            // read frequency        
+            // read frequency
             infile >> f;
             cout << setw(width) << "incident wave frequency:" << f << endl;
             // read amplitude of electric component
@@ -131,14 +131,16 @@ void InitFDTDProblem(const string &fname) {
             cout << setw(width) << "rei:" << rei << endl;
             infile >> nbound; //number of coarse cells in PML boundary
             cout << setw(width) << "PML width:" << nbound << endl;
-            infile >> scatwidth; // number of coarse cells between connecting interface and PML boundary 
+            infile >> scatwidth; // number of coarse cells between connecting interface and PML boundary
             cout << setw(width) << "scatter field width:" << scatwidth << endl;
             infile >> PlotStep;
             cout << setw(width) << "PlotStep:" << PlotStep << endl;
             infile >> CStep;
             cout << setw(width) << "Capture Step:" << CStep << endl;
-			infile >> denFormula;
-			cout << setw(width) << "Density Formula:" << denFormula << endl;
+            infile >> denFormula;
+            cout << setw(width) << "Density Formula:" << denFormula << endl;
+            infile >> ifWithDensity;
+            cout << setw(width) << "if with Density:"<<ifWithDensity <<endl;
             infile.close();
         } catch (exception &e) {
             cerr << e.what() << endl;
@@ -175,7 +177,7 @@ void InitFDTDProblem(const string &fname) {
             Ez0 = E0;
         }
 
-        //wave type   
+        //wave type
         IsTMz = _SOURCE_TMX_;
         IsTEz = _SOURCE_TEX_;
 
@@ -211,10 +213,10 @@ void InitFDTDProblem(const string &fname) {
         if (PlotStep < 1 || PlotStep > TotalTimeStep)
             PlotStep = 5;
         //how often to store data(in time step)
-		if(CStep == 0){
-			CStep = (unsigned int)(TotalTimeStep/TotalTime*2.5e-10+0.5);
-		}
-		if (CStep > 10000)
+        if(CStep == 0) {
+            CStep = (unsigned int)(TotalTimeStep/TotalTime*2.5e-10+0.5);
+        }
+        if (CStep > 10000)
             CStep = 100;
 
     } else {
@@ -231,7 +233,7 @@ void InitFDTDProblem(const string &fname) {
         //wave incident angle
         phi = INC_ANGLE * M_PI;
 
-        //wave type   
+        //wave type
         IsTMz = _SOURCE_TMX_;
         IsTEz = _SOURCE_TEX_;
 
@@ -239,7 +241,8 @@ void InitFDTDProblem(const string &fname) {
         NumOfWaveLength = NUMBER_OF_WAVELENGTHS_IN_DOMAIN;
 
         //initial FDTD grids
-        ds_M = dx = dy = lamda*MAXWELL_MESH_SIZE; //
+        NumOfCellPerWaveLen = NUMCELLPERWAVELEN;
+        ds_M = dx = dy = lamda/NumOfCellPerWaveLen;
         //initial total iteration step
         TotalTimeStep = (int) (0.5 + TOTAL_TIME / dt);
 
@@ -277,14 +280,14 @@ void InitFDTDProblem(const string &fname) {
         //how often to store data(in time step)
         CStep = 100;
 
-		//Density Formula
-		denFormula = 0;
+        //Density Formula
+        denFormula = 0;
     }
 }
 
 /*
  * @brief initial electricity density distribution
- * 
+ *
  */
 void InitEleDen() {
 
@@ -292,28 +295,28 @@ void InitEleDen() {
     MyDataF bndsz = m*(nbound + scatwidth+0.5);
     MyDataF temp = 2500e-12;
     unsigned int i, j;
-	unsigned int mi=0,mj=0;
-	MyDataF maxne=0;
-	MyDataF cx = 2.25*lamda+bndsz * ds_F;
-	MyDataF cy = 0.5*NumOfWaveLength*lamda+bndsz * ds_F;
-	MyDataF px,py;
+    unsigned int mi=0,mj=0;
+    MyDataF maxne=0;
+    MyDataF cx = 2.25*lamda+bndsz * ds_F;
+    MyDataF cy = 0.5*NumOfWaveLength*lamda+bndsz * ds_F;
+    MyDataF px,py;
 
     for (i = 0; i < Ne.nx; i++) {
-		px = (i * ds_F - cx);
-		px = px*px;
+        px = (i * ds_F - cx);
+        px = px*px;
         for (j = 0; j < Ne.ny; j++) {
- 			py = (j * ds_F - cy);
-			py = py*py;
-			Ne.data[i][j] = NE0 * exp(-(px+py) / temp);
-			if(maxne<Ne.data[i][j])
-			{
-				mi = i;
-				mj = j;
-				maxne=Ne.data[i][j];
-			}
+            py = (j * ds_F - cy);
+            py = py*py;
+            Ne.data[i][j] = NE0 * exp(-(px+py) / temp);
+            if(maxne<Ne.data[i][j])
+            {
+                mi = i;
+                mj = j;
+                maxne=Ne.data[i][j];
+            }
         }
     }
-	cout<<"max density position:("<<mi<<','<<mj<<')'<<endl;
+    cout<<"max density position:("<<mi<<','<<mj<<')'<<endl;
 }
 
 void InitCoeff() {
@@ -339,8 +342,8 @@ void CreateFields() {
         Pex.CreateStruct(Ex);
         Pey.CreateStruct(Ey);
 
-        Ux.CreateStruct(Ex);
-        Uy.CreateStruct(Ey);
+        Ux.CreateStruct(Ex,0);
+        Uy.CreateStruct(Ey,0);
 
         Ex.SetName(path + "ex");
         Ey.SetName(path + "ey");
@@ -364,25 +367,26 @@ void CreateFields() {
         //Pey.CreateStruct(nx,nyp1);
         Hz.SetName(path + "ez");
     }
-
-    Ne.CreateStruct(nxp1*m, nyp1 * m);
-    Pne.CreateStruct(Ne);
-    Ue.CreateStruct(Ne);
-	if(denFormula==2){
-		ppne.CreateStruct(Ne);
-		ppne.SetName("ppne");
-	}
-	if(denFormula==3){
-		Deff.CreateStruct(Ne);
-		Niu_i.CreateStruct(Ne);
-		Niu_a.CreateStruct(Ne);
-		Niu_i.SetName("Niu_i");
-		Deff.SetName("deff");
-		Niu_a.SetName("Niu_a");
-	}
-    Ne.SetName(path + "ne");
-    Pne.SetName(path + "pne");
-    Ue.SetName(path + "ue");
+    if(ifWithDensity) {
+        Ne.CreateStruct(nxp1*m, nyp1 * m);
+        Pne.CreateStruct(Ne);
+        Ue.CreateStruct(Ne);
+        if(denFormula==2) {
+            ppne.CreateStruct(Ne);
+            ppne.SetName("ppne");
+        }
+        if(denFormula==3) {
+            Deff.CreateStruct(Ne);
+            Niu_i.CreateStruct(Ne);
+            Niu_a.CreateStruct(Ne);
+            Niu_i.SetName("Niu_i");
+            Deff.SetName("deff");
+            Niu_a.SetName("Niu_a");
+        }
+        Ne.SetName(path + "ne");
+        Pne.SetName(path + "pne");
+        Ue.SetName(path + "ue");
+    }
 }
 
 void InitBreakDownParam() {
@@ -404,25 +408,25 @@ void InitComData() {
 
     m2 = (int) floor(0.5 + m / 2.0);
     ds_F = ds_M / m;
-	dt_F = T;//CFL_factor*ds_F*ds_F*0.5/D_kasi_max;// T; //
-	dt_M = dt;
+    dt_F = T;//CFL_factor*ds_F*ds_F*0.5/D_kasi_max;// T; //
+    dt_M = dt;
     half_dt = dt / 2;
     dt2 = 2 * dt;
     dt_me_e = dt * e / me;
     dt_me_e_2 = dt_me_e * 2;
-    
-	ds_Pow_2 = ds_F*ds_F;
+
+    ds_Pow_2 = ds_F*ds_F;
     dt_ds2_2 = dt_F*2 / ds_F / ds_F; //2*dt_F/ds_F/ds_F
-   	DtfDivDsfs = dt_F/ds_F/ds_F; //dt_F/ds_F/ds_F
+    DtfDivDsfs = dt_F/ds_F/ds_F; //dt_F/ds_F/ds_F
     eps_m_e_miu = eps_0 / (e * (mu_e + mu_i));
     CurTime = 0.0;
-	pci  = (2.25-1.5)*lamda/ds_F+midi;
+    pci  = (2.25-1.5)*lamda/ds_F+midi;
 }
 
 void PrintParam() {
     int width = 10;
     //Feild components
-	cout << "(pci,midj)=("<<pci<<','<<midj<<')'<<endl;
+    cout << "(pci,midj)=("<<pci<<','<<midj<<')'<<endl;
     cout << "=====================< component size >===================" << endl;
     cout << "Ex:" << Ex.nx << '\t' << Ex.ny << endl;
     cout << "Ey:" << Ey.nx << '\t' << Ey.ny << endl;
@@ -479,7 +483,7 @@ void PrintParam() {
     cout << setw(width) << "dt_F:" << dt_F << endl;
     cout << setw(width) << "dt_M:" << dt_M << endl;
     cout << setw(width) << "half_dt:" << half_dt << endl;
-    cout << setw(width) << "dt2:" << dt2 << endl; //dt*2    
+    cout << setw(width) << "dt2:" << dt2 << endl; //dt*2
     cout << setw(width) << "dx:" << dx << endl;
     cout << setw(width) << "dy:" << dy << endl;
     cout << setw(width) << "ds_F:" << ds_F << endl;
@@ -523,6 +527,7 @@ void PrintParam() {
     cout << setw(width) << "plot step:" << PlotStep << endl;
     cout << setw(width) << "NumOfCellPerWaveLen:" << NumOfCellPerWaveLen << endl;
     cout << setw(width) << "CurTime:" << CurTime << endl; //current time
+    cout << setw(width) << "ifWithDensity:"<<ifWithDensity<<endl;
     cout << "======================================================" << endl;
 }
 
@@ -534,11 +539,11 @@ void Initial(const string &fname) {
 
     InitComData();
     CreateFields();
-    InitEleDen();
+    if(ifWithDensity)InitEleDen();
     InitCoeff();
-	midi = Ne.nx/2;
-	midj = Ne.ny/2;
-    	InitStoreIndex();
+    midi = Ne.nx/2;
+    midj = Ne.ny/2;
+    InitStoreIndex();
 
     PrintParam();
 }

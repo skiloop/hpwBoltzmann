@@ -74,7 +74,7 @@ MyDataF PhaseVelRatio(MyDataF angle) {
         kp = kp - err;
         i++;
     }
-    cout << i << '\t' << kp << endl;
+    // cout << i << '\t' << kp << endl;
     return 2 * M_PI * c / kp;
 }
 

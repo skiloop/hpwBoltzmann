@@ -14,12 +14,14 @@
 extern unsigned pis, pie, pjs, pje;
 
 void CapFields(unsigned int step) {
-    std::cout << "==========Capture fields the " << step << " times ============" << std::endl;
+    //std::cout << "==========Capture fields the " << step << " times ============" << std::endl;
     //Ex.CaptData(step);
     //Ey.CaptData(step);
     //Hz.CaptData(step);
-    //Ue.CaptData(step);
-    Ne.CaptData(step);
+    if(ifWithDensity) {
+        //Ue.CaptData(step);
+        Ne.CaptData(step);
+    }
 }
 
 void UpdateEField() {
@@ -33,13 +35,13 @@ void UpdateEField() {
         for (i = 0; i < Ex.nx; i++) {
             for (j = pjs + 1; j < pje; j++) {
                 Ex.data[i][j] += cexhz * (Hz.data[i][j] - Hz.data[i][j - 1])
-                        + cexux * Ux.data[i][j];
+                                 + cexux * Ux.data[i][j];
             }
         }
         for (i = 1 + pis; i < pie; i++) {
             for (j = 0; j < Ey.ny - 1; j++) {
                 Ey.data[i][j] += ceyhz * (Hz.data[i][j] - Hz.data[i - 1][j])
-                        + ceyuy * Uy.data[i][j];
+                                 + ceyuy * Uy.data[i][j];
             }
         }
     }
@@ -53,8 +55,8 @@ void UpdateMField() {
     for (i = pis; i < pie; i++) {
         for (j = pjs; j < pje; j++) {
             Hz.data[i][j] +=
-                    chzex * (Ex.data[i][j + 1] - Ex.data[i][j]) +
-                    chzey * (Ey.data[i + 1][j] - Ey.data[i][j]);
+                chzex * (Ex.data[i][j + 1] - Ex.data[i][j]) +
+                chzey * (Ey.data[i + 1][j] - Ey.data[i][j]);
         }
     }
 }
@@ -91,7 +93,7 @@ void SumErms() {
     /*
     unsigned i, j;
     MyDataF tEx, tEy;
-    
+
     if (IsTMz) {
         for (i = 1; i < Erms.nx - 1; i++) {
             for (j = 1; j < Erms.ny - 1; j++) {
