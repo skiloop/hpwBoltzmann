@@ -1,0 +1,14 @@
+ f;
+ E0;// read amplitude of electric component
+ phi;// read phrase angle
+ TotalTime;
+ NumOfWaveLength;
+ NumOfCellPerWaveLen;
+ m; //number of fine cells per coarse cell
+ rei; //number of fine cells per coarse cell
+ nbound; //number of coarse cells in PML boundary
+ scatwidth; // number of coarse cells between connecting interface and PML boundary
+ PlotStep;
+ CStep;
+ denFormula;
+ ifWithDensity;
