@@ -33,4 +33,8 @@ inline MyDataF ElectricEnergy(unsigned im, unsigned jm) {
         return Ue.data[im][jm] / Ne.data[im][jm];
 }
 
+void CalEmax();
+void InterpEmax();
+MyDataF getEmax(int i, int j) ;
+
 #endif

@@ -7,17 +7,90 @@
  */
 
 #include <iostream>
-
+#include <math.h>
 #include "commondata.h"
 #include "updatefields.h"
 
 extern unsigned pis, pie, pjs, pje;
 
+void InterpEmax() {
+    unsigned i,j;
+    unsigned im,jm;
+    for(i=m2; i<Em.nx-m2; i++) {
+        for(j=m2; j<Em.ny-m2; j++) {
+            if((i+m2)%m!=0 && (j+m2)%m!=0) {
+                im = ((i-m2)/m)*m+m2;
+                jm = ((j-m2)/m)*m+m2;
+                Em.data[i][j] = ((im+m-i)*(jm-m-j)*Em.data[im][jm]
+                                 +(im+m-i)*(j-jm)*Em.data[im][jm+m]+(i-im)*(jm+m-j)*Em.data[im+m][jm]+(im+m-i)*(jm+m-j)*Em.data[im+m][jm+m])/(m*m);
+            }
+        }
+    }
+
+}
+void CalEmax() {
+    //unsigned xi,xj,yi,yj;
+    unsigned i,j;
+    unsigned im,jm;
+    MyDataF eabs;
+#ifdef DEBUG
+    MyDataF maxEm=0;
+    unsigned mi = 0;
+    unsigned mj = 0;
+#endif
+
+    if(IsTMz) {
+        MyDataF emx,emy;
+        for(im=m2,i=0; im<Em.nx-m2; i++,im+=m) {
+            for(jm=m2,j=0; jm<Em.ny-m2; j++,jm+=m) {
+                emx = (Ex.data[i][j]+Ex.data[i][j+1])/2;
+                emy = (Ey.data[i][j]+Ey.data[i+1][j])/2;
+                eabs=sqrt(emx*emx+emy*emy);
+                if(eabs>Em.data[im][jm]){
+			Em.data[im][jm] = eabs;
+#ifdef DEBUG
+			if (eabs>maxEm){
+				maxEm=eabs;
+				mi = im;
+				mj = jm;
+			}
+#endif
+		}
+            }
+        }
+    }
+    if(IsTEz) {
+        for(im=0,i=0; im<Em.nx; i++,im+=m) {
+            for(jm=0,j=0; jm<Em.ny; j++,jm+=m) {
+                eabs = fabs(Hz.data[i][j]);
+                if(eabs>Em.data[im][jm]){
+                    Em.data[im][jm] = eabs;
+#ifdef DEBUG
+		    if (eabs>maxEm){
+			    maxEm=eabs;
+			    mi = im;
+			    mj = jm;
+		    }
+#endif
+		}
+            }
+        }
+    }
+#ifdef DEBUG
+    cout << "maxEm: " << maxEm << '\t' << mi << '\t' << mj << endl;
+#endif
+}
+
+MyDataF getEmax(int i, int j) {
+    return Em.data[i][j];
+}
+
+
 void CapFields(unsigned int step) {
     //std::cout << "==========Capture fields the " << step << " times ============" << std::endl;
     //Ex.CaptData(step);
     //Ey.CaptData(step);
-    //Hz.CaptData(step);
+    Hz.CaptData(step);
     if(ifWithDensity) {
         //Ue.CaptData(step);
         Ne.CaptData(step);
@@ -27,7 +100,6 @@ void CapFields(unsigned int step) {
 void UpdateEField() {
 
     unsigned int i, j;
-
 
     if (IsTMz) {
         Pex = Ex;

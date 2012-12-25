@@ -30,7 +30,7 @@ void printsize(int xpos, int ypos, int sxpos, int sypos);
 void fdtdloop() {
 
     unsigned int CurTimeStep; //current time step
-    
+
     //FILE *fne;
     //unsigned int i,j;
     //MyDataF *CapEF;
@@ -39,18 +39,18 @@ void fdtdloop() {
     //int cnt=0;
     int step_per_half_ns8 = (int) (0.5 + 0.125e-9 / dt_F);
     clock_t t_start, t_end;
-    
-    //MyDataF RealEz,rhtb;
-/*
-    unsigned int xpos, ypos, sxpos, sypos;
-    sxpos = (int) (0.5 + ny / 2); //x position of sources
-    sypos = (int) (0.5 + ny / 2);
-    xpos = (int) (0.5 + nx / 2 + lamda / dx); //x position of field to be captured
-    ypos = (int) (0.5 + ny / 2 + lamda / dy); //y position of field to be captured
 
-    sxpos = (int) (0.5 + nx / 2 + 0.125 * lamda / dx); //tpis+3;//tpis-SCATTER_FIELD_DOMAIN_BND_SIZE/2;//x position of sources
-    sypos = (int) (0.5 + (tpjs + tpje) / 2); //(ny/2); //y position of sources
-*/
+    //MyDataF RealEz,rhtb;
+    /*
+        unsigned int xpos, ypos, sxpos, sypos;
+        sxpos = (int) (0.5 + ny / 2); //x position of sources
+        sypos = (int) (0.5 + ny / 2);
+        xpos = (int) (0.5 + nx / 2 + lamda / dx); //x position of field to be captured
+        ypos = (int) (0.5 + ny / 2 + lamda / dy); //y position of field to be captured
+
+        sxpos = (int) (0.5 + nx / 2 + 0.125 * lamda / dx); //tpis+3;//tpis-SCATTER_FIELD_DOMAIN_BND_SIZE/2;//x position of sources
+        sypos = (int) (0.5 + (tpjs + tpje) / 2); //(ny/2); //y position of sources
+    */
     MultiSize = (int) (0.5 + dt_F / dt);
 
     cout<<endl;
@@ -86,7 +86,11 @@ void fdtdloop() {
             UpdateEField();
             ApplyConnectingE(CurTime);
             UpdEltFldForPML_TMz(Ex, Ey, Hz);
-           if(ifWithDensity)UpdateUeField();
+
+            if(ifWithDensity) {
+                if(denFormula==4)CalEmax();
+                else UpdateUeField();
+            }
 
             if (Step % PlotStep == 0)
                 MatlabSimulation();
@@ -97,7 +101,7 @@ void fdtdloop() {
 
         cout << Step << '\t' << CurTime / 1e-9 << endl;
     }//END FOR
-    //SaveD(cnt); 
+    //SaveD(cnt);
 
     EndSimulation();
     t_end = clock();

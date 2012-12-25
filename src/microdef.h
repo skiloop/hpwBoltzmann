@@ -33,7 +33,7 @@
 #define FREQUENCY 110E9
 #define MAX_NE 1E29
 #define INC_ANGLE 0.0*M_PI
-
+#define PROJECT_2012_10
 ////////////////////////////////////
 //SAMPLE DEFINITION
 ///////////////////////////////////

@@ -386,6 +386,11 @@ void CreateFields() {
         Ne.SetName(path + "ne");
         Pne.SetName(path + "pne");
         Ue.SetName(path + "ue");
+#ifdef PROJECT_2012_10
+    Em.CreateStruct(Ne);
+    Em.SetName("Emax");
+#endif
+
     }
 }
 
@@ -395,7 +400,8 @@ void InitBreakDownParam() {
     //////////////////////////////////////////////
 
     mu_e = e / me / vm; //3.7e-2;
-    mu_i = mu_e / 100.0; //mu_e/mu_i ranges from 100 to 200
+    mu_i = mu_e / MueDivMui; //mu_e/mu_i (MueDivMui)ranges from 100 to 200 ;
+    miu2DivE = mu_e * 2 / e;
     De = mu_e*2*1.6021e-19/e;//8.73e-2; //
     Da = De * mu_i / mu_e;
 
@@ -457,6 +463,7 @@ void PrintParam() {
     cout << setw(width) << "De:" << De << endl;
     cout << setw(width) << "Da:" << Da << endl;
     cout << setw(width) << "D_kasi_max:" << D_kasi_max << endl;
+    cout << setw(width) << "Mu_e/Mu_i:" << MueDivMui <<endl;
     cout << setw(width) << "Miu_e:" << mu_e << endl;
     cout << setw(width) << "Miu_i:" << mu_i << endl;
     cout << setw(width) << "R_ei:" << rei << endl;
@@ -469,6 +476,7 @@ void PrintParam() {
     //speed of light
     cout << setw(width) << "c:" << c << endl;
     cout << setw(width) << "GasDen:" << GasDen << endl;
+    cout << setw(width) <<"N_air:"<<N_air<<endl;
     //electron mass
     cout << setw(width) << "Mass_e:" << me << endl;
     cout << setw(width) << "Miu_0:" << mu_0 << endl;
@@ -493,6 +501,7 @@ void PrintParam() {
     cout << setw(width) << "dt_me_e:" << dt_me_e << endl;
     cout << setw(width) << "dt_me_e_2:" << dt_me_e_2 << endl;
     cout << setw(width) << "dt_ds2_2:" << dt_ds2_2 << endl; //2*dt/dx/dx
+    cout << setw(width) << "miu2DivE:" << miu2DivE << endl; 
     cout << setw(width) << "DtfDivDsf :" << DtfDivDsfs << endl; //2*dt/dx/dx
     //DOMAIN DATA
     cout << setw(width) << "nx:" << nx << endl;

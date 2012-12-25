@@ -9,6 +9,7 @@ Alpha_MorrowAndLowke	src/InonizationFormula.cpp	/^double Alpha_MorrowAndLowke(do
 Alpha_Nikonov	src/InonizationFormula.cpp	/^double Alpha_Nikonov(double E, double P) {$/;"	f
 ApplyConnectingE	src/connectingdef.cpp	/^void ApplyConnectingE(const MyDataF t) {$/;"	f
 ApplyConnectingM	src/connectingdef.cpp	/^void ApplyConnectingM(const MyDataF t) {$/;"	f
+ArrayCount	src/commondata.cpp	/^const int ArrayCount = 400;$/;"	v
 BOUNDDATA_H	src/bounddata.cpp	3;"	d	file:
 BOUNDDATA_H	src/bounddata.h	3;"	d
 BackupMyStruct	src/datastruct.cpp	/^int MyStruct::BackupMyStruct(const MyStruct &obj) {$/;"	f	class:MyStruct
@@ -25,7 +26,8 @@ COORDINATES	src/bounddata.h	27;"	d
 COURANT_FACTOR	src/microdef.h	11;"	d
 CStep	src/commondata.cpp	/^unsigned int CStep;$/;"	v
 CXX	Makefile	/^CXX = g++$/;"	m
-CXXFLAGS	Makefile	/^CXXFLAGS = -g -D_DEBUG -Wall #-DMATLAB_SIMULATION $/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS = -O3 -Wall #-DMATLAB_SIMULATION $/;"	m
+CalEmax	src/updatefields.cpp	/^void CalEmax() {$/;"	f
 CalculateDelay	src/connectingdef.cpp	/^void CalculateDelay(MyDataF IncAngle) {$/;"	f
 CapFields	src/updatefields.cpp	/^void CapFields(unsigned int step) {$/;"	f
 CaptData	src/datastruct.cpp	/^void MyStruct::CaptData(const unsigned num, unsigned p) {$/;"	f	class:MyStruct
@@ -120,6 +122,7 @@ E0	src/commondata.cpp	/^MyDataF E0, H0;$/;"	v
 E_0	src/microdef.h	30;"	d
 Ei	src/connectingdef.cpp	/^MyDataF *Ei, *Hi;$/;"	v
 ElectricEnergy	src/updatefields.h	/^inline MyDataF ElectricEnergy(unsigned im, unsigned jm) {$/;"	f
+Em	src/commondata.cpp	/^MyStruct Em;$/;"	v
 EndSimulation	src/matlabsim.cpp	/^void EndSimulation() {$/;"	f
 Eta_Kang	src/InonizationFormula.cpp	/^double Eta_Kang(double E) {$/;"	f
 Eta_MorrowAndLowke	src/InonizationFormula.cpp	/^double Eta_MorrowAndLowke(double E, double N) {$/;"	f
@@ -162,6 +165,7 @@ Hzy_xn	src/bounddata.cpp	/^COORDINATES Hzy_xn;$/;"	v
 Hzy_xp	src/bounddata.cpp	/^COORDINATES Hzy_xp;$/;"	v
 Hzy_yn	src/bounddata.cpp	/^COORDINATES Hzy_yn;$/;"	v
 Hzy_yp	src/bounddata.cpp	/^COORDINATES Hzy_yp;$/;"	v
+INC	Makefile	/^INC= -I$(MATLAB_INC)$/;"	m
 INC_ANGLE	src/microdef.h	35;"	d
 INC_SIZE	src/connectingdef.h	19;"	d
 INIT_DATA_INCLUDE	src/initials.h	4;"	d
@@ -176,11 +180,12 @@ InitMatlabEngine	src/datastruct.cpp	/^int MyStruct::InitMatlabEngine() {$/;"	f	c
 InitMatlabEngine	src/matlabsim.cpp	/^void InitMatlabEngine() {$/;"	f
 InitPMLCoefficients	src/pmlbound.cpp	/^void InitPMLCoefficients() {$/;"	f
 InitPlot	src/datastruct.cpp	/^void MyStruct::InitPlot() {$/;"	f	class:MyStruct
-InitStoreIndex	src/initials.cpp	/^void InitStoreIndex(){$/;"	f
+InitStoreIndex	src/initials.cpp	/^void InitStoreIndex() {$/;"	f
 InitStructData	src/datastruct.cpp	/^void MyStruct::InitStructData(MyDataF initVal) {$/;"	f	class:MyStruct
 Initial	src/initials.cpp	/^void Initial(const string &fname) {$/;"	f
 InitialPML	src/pmlbound.cpp	/^void InitialPML(unsigned ncpml, unsigned ncx, unsigned ncy) {$/;"	f
 Interp	src/FileInterp.h	/^    double Interp(double vx) {$/;"	f	class:FileInterp
+InterpEmax	src/updatefields.cpp	/^void InterpEmax() {$/;"	f
 InterpUe	src/updatedensity.cpp	/^void InterpUe(unsigned InterStep) {$/;"	f
 Interpolation	src/interp.h	/^class Interpolation \/\/七次拉格朗日插值$/;"	c
 IsAnySidePML	src/bounddata.cpp	/^int IsAnySidePML = 0;$/;"	v
@@ -193,10 +198,11 @@ IsTMz	src/commondata.cpp	/^int IsTMz;$/;"	v
 LEAPSTEP_OF_CAPTURE	src/microdef.h	42;"	d
 LEAPSTEP_OF_DISPLAY	src/microdef.h	40;"	d
 LFLAGS	Makefile	/^LFLAGS = -g -O3$/;"	m
+LIB	Makefile	/^LIB= -L$(MATLAB_LIB) -leng -lmx -Wl,-rpath-link $(MATLAB_LIB)$/;"	m
 Linear_interpolation	src/interp.cpp	/^double Interpolation::Linear_interpolation(double const *x, double const *y, int n, double t) {$/;"	f	class:Interpolation
 MATLAB_INC	Makefile	/^MATLAB_INC=$(MATLAB_ROOT)\/extern\/include$/;"	m
 MATLAB_LIB	Makefile	/^MATLAB_LIB=$(MATLAB_ROOT)\/bin\/glnxa64$/;"	m
-MATLAB_ROOT	Makefile	/^MATLAB_ROOT=\/opt\/MATLAB\/R2011a$/;"	m
+MATLAB_ROOT	Makefile	/^MATLAB_ROOT=\/opt\/Matlab\/R2011a$/;"	m
 MATLAB_SIM_H	src/matlabsim.h	3;"	d
 MAXWELL_MESH_SIZE	src/microdef.h	14;"	d
 MAX_ITER	src/connectingdef.cpp	58;"	d	file:
@@ -205,6 +211,7 @@ MAX_NE	src/microdef.h	34;"	d
 MICRODEF_H	src/microdef.h	3;"	d
 MTimeStep	src/fdtdloop.cpp	/^unsigned int MTimeStep = 1, MultiSize;$/;"	v
 MatlabSimulation	src/matlabsim.cpp	/^void MatlabSimulation() {$/;"	f
+MueDivMui	src/commondata.cpp	/^MyDataF MueDivMui=100.0;$/;"	v
 MultiSize	src/fdtdloop.cpp	/^unsigned int MTimeStep = 1, MultiSize;$/;"	v
 MyArray	src/datastruct.h	/^    mxArray *MyArray;$/;"	m	class:MyStruct
 MyDataF	src/datastruct.h	/^typedef double MyDataF;$/;"	t
@@ -216,6 +223,8 @@ NE_MAX_LIMIT	src/microdef.h	10;"	d
 NUMBER_OF_CELLS_IN_PML_BOUND	src/microdef.h	15;"	d
 NUMBER_OF_WAVELENGTHS_IN_DOMAIN	src/microdef.h	17;"	d
 NUMCELLPERWAVELEN	src/microdef.h	13;"	d
+N_air	src/commondata.cpp	/^const MyDataF N_air = 2.44e25; \/\/ in m^(-3)$/;"	v
+N_air	src/commondata.h	/^const MyDataF N_air = 2.44e25; \/\/ in m^(-3)$/;"	v
 Ne	src/commondata.cpp	/^MyStruct Ne; \/\/density field component$/;"	v
 Niu_Kang	src/InonizationFormula.cpp	/^void Niu_Kang(double *pNiu_i, double *pNiu_a, double E) {$/;"	f
 Niu_MorrowAndLowke	src/InonizationFormula.cpp	/^void Niu_MorrowAndLowke(double *pNiu_i, double *pNiu_a, double E, double N) {$/;"	f
@@ -238,6 +247,7 @@ PMLCellxn	src/bounddata.cpp	/^unsigned int PMLCellxn = 0;$/;"	v
 PMLCellxp	src/bounddata.cpp	/^unsigned int PMLCellxp = 0;$/;"	v
 PMLCellyn	src/bounddata.cpp	/^unsigned int PMLCellyn = 0;$/;"	v
 PMLCellyp	src/bounddata.cpp	/^unsigned int PMLCellyp = 0;$/;"	v
+PROJECT_2012_10	src/microdef.h	36;"	d
 PULSE_LENGGTH_IN_TIME	src/microdef.h	23;"	d
 Pex	src/commondata.cpp	/^MyStruct Pex; \/\/Ey at previous step$/;"	v
 Pey	src/commondata.cpp	/^MyStruct Pey; \/\/Ey at previous step$/;"	v
@@ -254,7 +264,7 @@ SAVE_ERMS_LEAP	src/microdef.h	22;"	d
 SAVE_LEAP	src/microdef.h	21;"	d
 SCATTERED_FORMATION	src/microdef.h	25;"	d
 SCATTER_FIELD_DOMAIN_BND_SIZE	src/microdef.h	16;"	d
-SD	src/fdtdloop.cpp	119;"	d	file:
+SD	src/fdtdloop.cpp	110;"	d	file:
 SD	src/fdtdloop.cpp	3;"	d	file:
 SD	src/fdtdloop.h	19;"	d
 SOURCES_SIZE	src/microdef.h	51;"	d
@@ -346,9 +356,10 @@ eps_m_e_miu	src/commondata.cpp	/^MyDataF eps_m_e_miu; \/\/eps_0 \/ (e * (mu_e + 
 f	src/commondata.cpp	/^MyDataF f; \/\/frequency$/;"	v
 fdtdloop	src/fdtdloop.cpp	/^void fdtdloop() {$/;"	f
 freedata	src/freedata.h	/^void freedata()$/;"	f
+getEmax	src/updatefields.cpp	/^MyDataF getEmax(int i, int j) {$/;"	f
 half_dt	src/commondata.cpp	/^MyDataF half_dt;$/;"	v
 hilen	src/connectingdef.cpp	/^int eilen, hilen;$/;"	v
-ifWithDensity	src/commondata.cpp	/^int ifWithDensity=1;\/\/ if with density or not$/;"	v
+ifWithDensity	src/commondata.cpp	/^int ifWithDensity=0;\/\/ if with density or not$/;"	v
 k	src/commondata.cpp	/^MyDataF k; \/\/$/;"	v
 lamda	src/commondata.cpp	/^MyDataF lamda;$/;"	v
 length	src/commondata.h	/^const MyDataF length = 1.0;$/;"	v
@@ -406,6 +417,7 @@ tpis	src/connectingdef.cpp	/^unsigned tpis;$/;"	v
 tpje	src/connectingdef.cpp	/^unsigned tpje;$/;"	v
 tpjs	src/connectingdef.cpp	/^unsigned tpjs;$/;"	v
 updateDeff	src/updatedensity.cpp	/^void updateDeff() {$/;"	f
+v2Div3	src/updatedensity.cpp	/^const MyDataF v2Div3 = 2.00000000000\/3.000000000;$/;"	v
 vm	src/commondata.h	/^const MyDataF vm = 760 * 5.3e9;$/;"	v
 x	src/FileInterp.h	/^    double *x;$/;"	m	class:FileInterp
 xe	src/connectingdef.cpp	/^int xe;$/;"	v

@@ -35,11 +35,20 @@ extern FileInterp va;
 extern FileInterp vc;
 extern FileInterp lossE;
 
+
+const MyDataF N_air = 2.44e25; // in m^(-3)
+extern FileInterp VcDivN;
+extern FileInterp ViDivN;
+extern FileInterp EnergyDivN;
+extern MyStruct Em;
+
+
 extern MyDataF De;
 extern MyDataF Da;
 extern MyDataF D_kasi_max;
 extern MyDataF mu_e;
 extern MyDataF mu_i;
+extern MyDataF MueDivMui;
 extern MyDataF p;
 
 //extern const unsigned Density_Time_Step;
@@ -74,6 +83,7 @@ extern MyDataF ds_Pow_2;//ds_F*ds_F
 extern unsigned m, m2;
 extern MyDataF dt_me_e;
 extern MyDataF dt_me_e_2;
+extern MyDataF miu2DivE; //2*miu_e/e
 extern MyDataF dt_ds2_2; //2*dt/ds_F/ds_F
 extern MyDataF eps_m_e_miu;//eps_0 / (e * (mu_e + mu_i))
 extern MyDataF DtfDivDsfs;

@@ -37,8 +37,10 @@ void savedata()
         Ux.SaveData();
         
     }
-    Ne.SaveData();
-    Ue.SaveData();	
+    if(ifWithDensity){
+	    Ne.SaveData();
+	    Ue.SaveData();	
+    }
 }
 
 #endif

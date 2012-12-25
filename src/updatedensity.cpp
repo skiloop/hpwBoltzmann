@@ -19,7 +19,7 @@
 using namespace std;
 
 extern unsigned tpis, tpjs, tpie, tpje;
-
+const MyDataF v2Div3 = 2.00000000000/3.000000000;
 void updateDeff() {
     unsigned int i, j, mt = m2*tpis;
     MyDataF eps = 0;
@@ -101,29 +101,58 @@ void UpdateDenDeff() {
 #endif
 }
 // update density with formular from Zhao at 2012-10
+// with Boltzmann equation
 // 2012-10-23
 // by Baofeng Shi
 // email: skiloop@126.com
 void UpdateDensity1210() {
     unsigned int i, j, mt = m2*tpis;
-    MyDataF opt1 = 0, opt2 = 0, opt3 = 0, opt4 = 0;
+    MyDataF opt1 = 0, opt2 = 0, opt3 = 0 ;//, opt4 = 0;
     unsigned mi = 0, mj = 0;
     MyDataF maxne = 0;
+    MyDataF EmDivN;
+    MyDataF niu_i,niu_a,energy,Te;
+    MyDataF deff,kasi;
+#ifdef DEBUG
+    unsigned midx=Ne.nx/2;
+    unsigned midy=Ne.ny/2;
+#endif
     Pne = Ne;
     for (i = mt; i < Ne.nx - mt; i++) {
         for (j = mt; j < Ne.ny - mt; j++) {
-            opt1 = 1 + dt * Niu_i.data[i][j];
-            opt2 = dt_ds2_2 * Deff.data[i][j] * (Pne.data[i - 1][j] + Pne.data[i + 1][j] +
-                                                 Pne.data[i][j + 1] + Pne.data[i][j - 1] - 4 * Pne.data[i][j]
-                                                );
-            opt3 = 1 + dt * (Niu_a.data[i][j] + rei * Ne.data[i][j]);
-            opt4 = ((Deff.data[i + 1][j] - Deff.data[i][j])*(Ne.data[i + 1][j] - Ne.data[i][j])+
-                    (Deff.data[i][j + 1] - Deff.data[i][j])*(Ne.data[i][j + 1] - Ne.data[i][j])) * dt_ds2_2;
-            Ne.data[i][j] = (Ne.data[i][j] * opt1 + opt2 + opt4) / opt3;
-            //if (j == midj || i == pci)
-            //   StoreOpt4(i, j, opt2, opt4);
-            if(i>=minSI&&j>=minSJ&&i<=maxSI&&j<=maxSJ)
-                StoreOpt4(i, j, opt2, opt4);
+            // get Em at (i,j)
+            EmDivN=getEmax(i,j)/N_air/1e-21;
+            // compute niu_i
+            niu_i = ViDivN.Interp(EmDivN)*N_air;
+            // compute niu_a
+            niu_a = VcDivN.Interp(EmDivN)*N_air;
+            // compute energy
+            energy = EnergyDivN.Interp(EmDivN);
+
+            // calculate Tempreture
+            Te = v2Div3*energy;
+
+            // calculate effective diffusion coefficient deff
+	    if (Ne.data[i][j]<=0.0){
+		    deff =  miu2DivE*Te;//mu_e*2*Te/e;//8.73e-2; //
+	    }else{
+		    kasi = eps_m_e_miu * niu_i /Ne.data[i][j];
+		    De = mu_e*2*Te/e;//8.73e-2; //
+		    Da = De / MueDivMui;
+		    deff = (kasi*De + Da)/(kasi + 1);
+	    }
+
+
+            // calculate Ne at (i,j)
+            opt1 = 1+dt_F*niu_i;
+            opt2 = deff*dt_F*(Pne.data[i][j+1]+Pne.data[i-1][j]+Pne.data[i+1][j]+Pne.data[i][j-1]-4*Ne.data[i][j])/ds_F/ds_F;
+            opt3 = 1+dt_F*(niu_a+rei*Ne.data[i][j]);
+            Ne.data[i][j] = (Ne.data[i][j]*opt1+opt2)/opt3;
+#ifdef DEBUG
+	    if (i==midx&&j==midy)
+		    cout << "Debug:" << getEmax(i,j)<<'\t'<< EmDivN <<'\t'<<niu_i<<'\t'<<niu_a<<'\t'<<energy <<endl;
+#endif
+
             if (maxne < Ne.data[i][j]) {
                 mi = i;
                 mj = j;
@@ -134,6 +163,7 @@ void UpdateDensity1210() {
     DensityBound(Ne, m*tpis, 0);
     cout << maxne << '\t' << mi << '\t' << mj << '\t';
     cout << Ne.data[Deff_Store_Index_x[5]][Deff_Store_Index_y[5]] << '\t' << Ne.data[midi][pci] << '\t';
+    cout << "Nemiddle" << Ne.data[Ne.nx/2][Ne.ny/2] << '\t';
     deff_file << endl;
     denfile << endl;
 #ifdef _DEBUG
@@ -150,8 +180,8 @@ void UpdateDensityOther() {
     unsigned ci = 0, cj = 0;
     MyDataF maxvi = 0, va_maxvi = 0, ne_maxvi = 0;
     MyDataF neij, kasi, gamma1 = 0, gamma2 = 0, down = 1;
-    MyDataF mvi = 0, mva = 0, mga1 = 0, mga2 = 0;
-    MyDataF mue = 0, mneij = 0;
+    //MyDataF mvi = 0, mva = 0, mga1 = 0, mga2 = 0;
+    //MyDataF mue, mneij;
     MyDataF meps = 0;
     MyDataF opt1 = 0, opt2 = 0, opt3 = 0;
 
@@ -182,37 +212,39 @@ void UpdateDensityOther() {
                                 gamma2 * (Pne.data[i - 1][j] + Pne.data[i + 1][j] +
                                           Pne.data[i][j + 1] + Pne.data[i][j - 1] - 4 * Pne.data[i][j]
                                          );
-                break;
-            case 2:
-                Ne.data[i][j] = Ne.data[i][j] * dt2 * (niu_i - niu_a) - ppne.data[i][j] +
-                                dt_ds2_2 * deff * (Pne.data[i - 1][j] + Pne.data[i + 1][j] +
-                                                   Pne.data[i][j + 1] + Pne.data[i][j - 1] - 4 * Pne.data[i][j]
-                                                  );
-                break;
-            case 3:
-                break;
-            default:
-                //Bhaskar Chaudhury's formula
-                opt1 = 1 + dt_F*niu_i;
-                opt2 = DtfDivDsfs * deff * (Pne.data[i - 1][j] + Pne.data[i + 1][j] +
-                                            Pne.data[i][j + 1] + Pne.data[i][j - 1] - 4 * Pne.data[i][j]
-                                           );
-                opt3 = 1 + dt_F * (niu_a + rei * neij);
-                Ne.data[i][j] = (neij * opt1 + opt2) / opt3;
-                break;
+                 break;
+                 case 2:
+                 Ne.data[i][j] = Ne.data[i][j] * dt2 * (niu_i - niu_a) - ppne.data[i][j] +
+                 dt_ds2_2 * deff * (Pne.data[i - 1][j] + Pne.data[i + 1][j] +
+                 Pne.data[i][j + 1] + Pne.data[i][j - 1] - 4 * Pne.data[i][j]
+                 );
+                 break;
+                 case 3:
+                 break;
+                 case 4:
+                 break;
+                 default:
+                 //Bhaskar Chaudhury's formula
+                 opt1 = 1 + dt_F*niu_i;
+                 opt2 = DtfDivDsfs * deff * (Pne.data[i - 1][j] + Pne.data[i + 1][j] +
+                                             Pne.data[i][j + 1] + Pne.data[i][j - 1] - 4 * Pne.data[i][j]
+                                            );
+                 opt3 = 1 + dt_F * (niu_a + rei * neij);
+                 Ne.data[i][j] = (neij * opt1 + opt2) / opt3;
+                 break;
             }
-            if (Ne.data[i][j] < 0)
-                Ne.data[i][j] = 0;
+             if (Ne.data[i][j] < 0)
+                 Ne.data[i][j] = 0;
             if (Ne.data[i][j] > maxne) {
                 maxne = Ne.data[i][j];
             }
             if (eps > meps) {
-                mue = Ue.data[i][j];
-                mneij = neij;
-                mvi = niu_i;
-                mva = niu_a;
-                mga1 = gamma1;
-                mga2 = gamma2;
+                //mue = Ue.data[i][j];
+                //mneij = neij;
+                //mvi = niu_i;
+                //mva = niu_a;
+                //mga1 = gamma1;
+                //mga2 = gamma2;
                 meps = eps;
             }
             if (Ne.data[i][j] < minne)
@@ -230,6 +262,7 @@ void UpdateDensityOther() {
     DensityBound(Ne, m*tpis, 0);
     denfile << setiosflags(ios_base::scientific)<<maxne << '\t' << minne << '\t' << maxvi << '\t' << ne_maxvi << '\t' << va_maxvi << '\t' << ci << '\t' << cj << endl;
     cout << setiosflags(ios_base::scientific)<<maxne << '\t' << minne << '\t' << maxvi << '\t' << ne_maxvi << '\t' << va_maxvi << '\t' << ci << '\t' << cj << '\t' << meps << '\t';
+    cout << "Nemiddle" << Ne.data[Ne.nx/2][Ne.ny/2] << '\t';
     /*
         cout << endl;
         cout << "meps\t" << meps << endl;
@@ -252,6 +285,10 @@ void UpdateDensity() {
     case 3:
         updateDeff();
         UpdateDenDeff();
+        break;
+    case 4:
+        InterpEmax();
+        UpdateDensity1210();
         break;
     default:
         UpdateDensityOther();

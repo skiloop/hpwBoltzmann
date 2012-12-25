@@ -48,6 +48,19 @@ FileInterp va(arrCount, svax, svay);
 FileInterp vc(arrCount, svcx, svcy);
 FileInterp lossE(arrCount, slossx, slossy);
 
+// for projects 2012 10
+
+const int ArrayCount = 400;
+const string EmDivNTxt("boltzmann/EmDivN.txt");
+const string EnergyTxt("boltzmann/m_energy.txt");
+const string vcTxt("boltzmann/vcDivN.txt");
+const string viTxt("boltzmann/viDivN.txt");
+FileInterp VcDivN(ArrayCount,EmDivNTxt,vcTxt);
+FileInterp ViDivN(ArrayCount,EmDivNTxt,viTxt);
+FileInterp EnergyDivN(ArrayCount,EmDivNTxt,EnergyTxt);
+MyStruct Em;
+
+
 //update coefficients
 MyDataF chzex, chzey; //coefficients updating Hz
 MyDataF cexhz, cexux; //coefficients updating Ex
@@ -72,10 +85,12 @@ MyDataF dy;
 MyDataF dt_me_e; //dt*e/me
 MyDataF dt_me_e_2; //dt*e/me*2
 MyDataF dt_ds2_2; //2*dt/ds_F/ds_F
+MyDataF miu2DivE; //2*mu_e/e
 MyDataF DtfDivDsfs; //dt_F/ds_F/ds_F
 MyDataF eps_m_e_miu; //eps_0 / (e * (mu_e + mu_i))
 MyDataF dt2; //dt*2
 MyDataF ds_Pow_2; //ds_F*ds_F
+MyDataF MueDivMui=100.0;
 
 unsigned m, m2;
 
