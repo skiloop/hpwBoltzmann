@@ -13,9 +13,6 @@
 
 #include "datastruct.h"
 
-
-
-
 #define INC_SIZE 0
 /**
  * @brief Initialize the connecting interface:

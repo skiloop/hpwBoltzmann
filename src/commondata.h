@@ -22,6 +22,13 @@ extern MyStruct Pey; //Ey at previous step
 extern MyStruct Pne; //Density Ne at previous step
 extern MyStruct Pux;
 extern MyStruct Puy;
+
+extern MyStruct Pez; //Ez at previous step
+extern MyStruct Ceex,Ceey,Ceez;
+extern MyStruct Cevx,Cevy,Cevz;
+extern MyStruct Cehx,Cehy,Cehz;
+extern MyStruct Hx,Hy,Ez,Vex,Vez,Vey;
+extern MyDataF chxez,chyez,Chzey,Chzex;
 extern MyStruct ppne,Deff,Niu_i,Niu_a;
 extern int denFormula;
 //update coefficients

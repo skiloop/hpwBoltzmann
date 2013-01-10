@@ -143,7 +143,7 @@ void CalEmax() {
 #endif
 }
 
-MyDataF getEmax(int i, int j) {
+MyDataF getEmDivN(int i, int j) {
     return Pem.data[i][j]/RN_air;
 }
 
@@ -203,7 +203,7 @@ void UpdateUField1210() {
     for (i = 0, im = m2; i < Ux.nx; im += m, i++) {
         for (j = 0, jm = 0; j < Ux.ny; jm += m, j++) {
             // get EmDivN at (i,j)
-            EmDivN=getEmax(i,j);
+            EmDivN=getEmDivN(i,j);
             // compute niu_c
             niu_c = VcDivN.Interp(EmDivN)*N_air;
 
@@ -217,7 +217,7 @@ void UpdateUField1210() {
     for (i = 0, im = 0; i < Uy.nx; im += m, i++) {
         for (j = 0, jm = m2; j < Uy.ny; j++, jm += m) {
             // get EmDivN at (i,j)
-            EmDivN=getEmax(i,j);
+            EmDivN=getEmDivN(i,j);
             // compute niu_c
             niu_c = VcDivN.Interp(EmDivN)*N_air;
 
@@ -317,3 +317,114 @@ void UpdateUField() {
 	}else
 		UpdateUFieldOther();
 }
+
+
+
+void UpdateEFieldWithV(){
+
+	//created 2011.03.23 21.20
+	//changed at 03.35 11:39
+	//Details: changed to only the E fields in domain are updated,
+	//			with those in bondaries egnored.
+	unsigned int i,j;
+	//unsigned index;
+	//unsigned int indx,indy;
+	//MyDataF Eztmp;
+	if(IsTMz){
+		Pex=Ex;
+		Pey=Ey;
+		for(i=0;i<Ex.nx;i++)
+			for(j=pjs+1;j<pje;j++){
+				//index = i*Hz.ny+j;
+				//indx=i*Ex.ny+j;
+				Ex.data[i][j]=Ceex.data[i][j]*(Pex.data[i][j])+
+					Cevx.data[i][j]*Vex.data[i][j]+Cehx.data[i][j]*
+					(Hz.data[i][j]-Hz.data[i][j-1])/dy;
+			}
+		for(i=1+pis;i<pie;i++)
+			for(j=0;j<Ey.ny-1;j++){
+				//indy = i*Ey.ny+j;
+				//index= i*Hz.ny+j;
+				Ey.data[i][j]=Ceey.data[i][j]*(Pey.data[i][j])
+					+Cevy.data[i][j]*Vey.data[i][j]+Cehy.data[i][j]*
+					(Hz.data[i][j]-Hz.data[i-1][j])/dx;
+			}
+		//AdjustEFieldAtCnntIntfc();
+	}
+	if(IsTEz){
+		//BackupMyStruct(Ez,Ez_pre);
+		Pez=Ez;
+		for(i=pis+1;i<pie;i++)
+			for(j=pjs+1;j<pje;j++){
+				//index	= i*Ez.ny+j;
+				//indy	= i*Hy.ny+j;
+				//indx	= i*Hx.ny+j;
+
+				Ez.data[i][j]=Ceez.data[i][j]*(Ez.data[i][j])+
+					Cevz.data[i][j]*Vez.data[i][j]+Cehz.data[i][j]*(
+					(Hy.data[i][j]-Hy.data[i-1][j])/dx-
+					(Hx.data[i][j]-Hx.data[i][j-1])/dy);
+				//Eztmp = fabs(Ez.data[i][j])*M_SQRT1_2;
+				//if(Eztmp>Erms.data[i*m*Erms.ny+j*m])
+				//	Erms.data[i*m*Erms.ny+j*m] = Eztmp;
+				/*if((Ez.data[i][j]>1e15)||(Ez.data[i][j]<-1e15))
+				{
+					printf("Ceez = %2.2e\nStep = %d",Ceez.data[i][j],Step);
+					printf("i = %d\tj =%d\n",i,j);
+					printf("Cevz = %2.2e\n",Cevz.data[i][j]);
+					printf("Cevz*Vez = %2.2e\n",Cevz.data[i][j]*Vez.data[i][j]);
+					printf("Cehz = %2.2e\n",Cehz.data[i][j]);
+					CaptData(1,"ne.dat",ne);
+					CaptData(1,"Ezsp.dat",Ez_pre);
+					//system("pause");
+				}*/
+			}
+	}
+}
+void UpdateMFieldWithV(){
+
+
+	//created 2011.03.23 21.20
+	//checked 03.23 21:23
+	//changed at 03.35 11:29
+	//Details: changed to only the M fields in domain are updated,
+	//			with those in bondaries egnored.
+	
+	unsigned int i,j;
+	//unsigned index,ind,ind2;
+	//double tmp1,tmp2,tmp3;
+	if(IsTEz){
+
+		for(i=0;i<Hx.nx;i++)
+			for(j=pjs;j<pje;j++){
+				//index=i*Hx.ny+j;
+				//ind = i*Ez.ny+j;
+
+				Hx.data[i][j]=Hx.data[i][j]+chxez*(Ez.data[i][j+1]-Ez.data[i][j]);
+			}
+
+		for(i=pis;i<pie;i++)
+			for(j=0;j<Hy.ny;j++){
+				//index=i*Hy.ny+j;
+				//ind = i*Ez.ny+j;
+				Hy.data[i][j]=Hy.data[i][j]+chyez*(Ez.data[i+1][j]-Ez.data[i][j]);
+			}
+	}
+	if(IsTMz){
+
+		for(i=pis;i<pie;i++)
+			for(j=pjs;j<pje;j++){
+				
+				//index=i*Hz.ny+j;
+				//ind = i*Ex.ny+j;
+				//ind2 = i*Ey.ny+j;
+				Hz.data[i][j]=Hz.data[i][j]+
+					chzey*(Ex.data[i][j+1]-Ex.data[i][j])+
+					chzex*(Ey.data[i+1][j]-Ey.data[i][j]);
+			}
+	}
+}
+
+
+
+

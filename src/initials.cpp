@@ -55,12 +55,12 @@ void InitStoreIndex() {
 }
 void OpenFiles()
 {
-    denfile.open("resdata/den.dat");
+    denfile.open("resdata/den.txt");
     if (!denfile.is_open()) {
         cerr << "open denfile failed!" << endl;
         exit(-1);
     } else cout<<"denfile is opened"<<endl;
-    deff_file.open("resdata/deff.dat");
+    deff_file.open("resdata/deff.txt");
     if (!deff_file.is_open()) {
         cerr << "open denfile failed!" << endl;
         exit(-1);
@@ -178,8 +178,8 @@ void InitFDTDProblem(const string &fname) {
         }
 
         //wave type
-        IsTMz = _SOURCE_TMX_;
-        IsTEz = _SOURCE_TEX_;
+        IsTMz = _SOURCE_TMZ_;
+        IsTEz = _SOURCE_TEZ_;
 
         //number of wavelength in domain
         if (NumOfWaveLength > 1000)
@@ -234,8 +234,8 @@ void InitFDTDProblem(const string &fname) {
         phi = INC_ANGLE * M_PI;
 
         //wave type
-        IsTMz = _SOURCE_TMX_;
-        IsTEz = _SOURCE_TEX_;
+        IsTMz = _SOURCE_TMZ_;
+        IsTEz = _SOURCE_TEZ_;
 
         //number of wavelength in domain
         NumOfWaveLength = NUMBER_OF_WAVELENGTHS_IN_DOMAIN;
@@ -321,14 +321,22 @@ void InitEleDen() {
 
 void InitCoeff() {
 
-    cexux = -dt * e / eps_0;
-    cexhz = dt / dy / eps_0;
+	if(IsTMz){
+		cexux = -dt * e / eps_0;
+		cexhz = dt / dy / eps_0;
 
-    ceyhz = -dt / eps_0 / dx;
-    ceyuy = -e * dt / eps_0;
+		ceyhz = -dt / eps_0 / dx;
+		ceyuy = -e * dt / eps_0;
 
-    chzex = dt / mu_0 / dy;
-    chzey = -dt / mu_0 / dx;
+		chzex = dt / mu_0 / dy;
+		chzey = -dt / mu_0 / dx;
+	}
+	if(IsTEz){
+		
+		chxez = -dt/mu_0/dy;
+		chyez = dt/mu_0/dx;
+
+	}
 }
 
 void CreateFields() {

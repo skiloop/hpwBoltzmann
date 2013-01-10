@@ -3,6 +3,7 @@
 #define MICRODEF_H
 #define _USE_MATH_DEFINES
 #include <math.h>
+
 /////////////////////////////////
 //FDTD DEFINITION
 /////////////////////////////////
@@ -24,25 +25,44 @@
 #define FINE_GRID_SIZE 4
 #define SCATTERED_FORMATION
 
-#ifndef _SOURCE_TEX_
-// if not define _SOURCE_TMX_ then define _SOURCE_TEX_=1
-#ifndef _SOURCE_TMX_
-#define _SOURCE_TEX_ 1
-#define _SOURCE_TMX_ 0
-#elif (_SOURCE_TMX_!=0)
-#define _SOURCE_TEX_ 0
+
+/////////////////////////
+// plasma default
+//////////////////////////
+#define NE0 1e13
+
+#define DEFAULT_REI -1.0
+#define DEFAULT_MIU_DIV 100.0
+#define DEFAULT_AIR_PRESSURE 760.0
+#define IF_WITH_DENSITY 0
+
+
+////////////////////////
+// wave type default
+///////////////////////
+#ifndef _SOURCE_TEZ_
+// if not define _SOURCE_TMZ_ then define _SOURCE_TEZ_=1
+#ifndef _SOURCE_TMZ_
+#define _SOURCE_TEZ_ 1
+#define _SOURCE_TMZ_ 0
+#elif (_SOURCE_TMZ_!=0)
+#define _SOURCE_TEZ_ 0
 #else
-#define _SOURCE_TEX_ 1
+#define _SOURCE_TEZ_ 1
 #endif
 #endif // 
 
 #define E_0 6e6
-#define NE0 1e13
 
 #define FREQUENCY 110E9
 #define MAX_NE 1E29
 #define INC_ANGLE 0.0*M_PI
+
+
+
+// option
 #define PROJECT_2012_10
+
 ////////////////////////////////////
 //SAMPLE DEFINITION
 ///////////////////////////////////
