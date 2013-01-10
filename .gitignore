@@ -24,13 +24,6 @@ resdata/*
 hpw
 
 
-
-/hpwBoltzman.sln
-/hpwBoltzman.ncb
-/hpwBoltzman.vcproj.user
-/*.user
-/*.vcproj
 Debug
-/hpwBoltzmann.sln
 /hpw.exe
-*.suo
+/x64

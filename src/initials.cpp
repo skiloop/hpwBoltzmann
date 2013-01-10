@@ -36,7 +36,7 @@ void InitStoreIndex() {
             Deff_Store_Index_y[c] = (cy-1.5)*lamda/ds_F+midj;
             cout<<c<<'\t'<<Deff_Store_Index_x[c]<<'\t'<<Deff_Store_Index_y[c]<<endl;
 
-            //计算保存区域下标的范围
+            //index range for computation area
             if(minSI>Deff_Store_Index_x[c])minSI=Deff_Store_Index_x[c];
             if(minSJ>Deff_Store_Index_y[c])minSJ=Deff_Store_Index_y[c];
             if(maxSI<Deff_Store_Index_x[c])maxSI=Deff_Store_Index_x[c];

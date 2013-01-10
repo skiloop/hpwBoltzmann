@@ -141,9 +141,11 @@ int MyStruct::ResetStructData(MyDataF Val) {
     unsigned i, j;
     if (!CheckStruct())
         return -1;
-    for (i = 0; i < nx; i++)
-        for (j = 0; j < ny; j++)
+	for (i = 0; i < nx; i++){
+		for (j = 0; j < ny; j++){
             data[i][j] = Val;
+		}
+	}
     return 0;
 }
 
@@ -226,16 +228,20 @@ void MyStruct::operator = (MyStruct const &other){
     unsigned i, j;
     if (&other == this || data == NULL || other.data == NULL || other.nx != nx || other.ny != ny)
         return;
-    for (i = 0; i < nx; i++)
-        for (j = 0; j < ny; j++)
+	for (i = 0; i < nx; i++){
+		for (j = 0; j < ny; j++){
             data[i][j] = other.data[i][j];
+		}
+	}
 }
 
 void MyStruct::InitStructData(MyDataF initVal) {
     unsigned i, j;
-    for (i = 0; i < nx; i++)
-        for (j = 0; j < ny; j++)
+	for (i = 0; i < nx; i++){
+		for (j = 0; j < ny; j++){
             data[i][j] = initVal;
+		}
+	}
 }
 
 void MyStruct::SaveData(unsigned leap) {
