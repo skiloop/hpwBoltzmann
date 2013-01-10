@@ -17,3 +17,8 @@
 tp1
 compress
 
+# dat-file in resdata
+resdata/*.*
+
+
+
