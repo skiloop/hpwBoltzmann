@@ -12,3 +12,8 @@
 *.la
 *.a
 *~
+
+# directories
+tp1
+compress
+

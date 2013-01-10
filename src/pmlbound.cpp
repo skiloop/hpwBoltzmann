@@ -95,14 +95,18 @@ bool CreatePMLCoeffients(unsigned int ncx, unsigned int ncy) {
             if (IsTEz) {
                 Chyh_xn.CreateStruct(PMLCellxn, nym1);
                 Chyez_xn.CreateStruct(PMLCellxn, nym1);
-
-                Cezxe_xn.CreateStruct(Ezx_xn.nx, Ezx_xn.ny);
-                Cezxhy_xn.CreateStruct(Ezx_xn.nx, Ezx_xn.ny);
-
-                Cezye_xn.CreateStruct(Ezy_xn.nx, Ezy_xn.ny);
-                Cezyhx_xn.CreateStruct(Ezy_xn.nx, Ezy_xn.ny);
+                Cezxe_xn.CreateStruct(Ezx_xn);
+                Cezxhy_xn.CreateStruct(Ezx_xn);
+                Cezye_xn.CreateStruct(Ezy_xn);
+                Cezyhx_xn.CreateStruct(Ezy_xn);
             }
             if (IsTMz) {
+                //Chyh_xn.CreateStruct(PMLCellxn, ny);
+                //Chyez_xn.CreateStruct(PMLCellxn, ny);
+                //Cezxe_xn.CreateStruct(Hzx_xn);
+                //Cezxhy_xn.CreateStruct(Hzx_xn);
+                //Cezye_xn.CreateStruct(Hzy_xn);
+                //Cezyhx_xn.CreateStruct(Hzy_xn);
                 Ceye_xn.CreateStruct(PMLCellxn, ny);
                 Ceyhz_xn.CreateStruct(PMLCellxn, ny);
                 Chzxh_xn.CreateStruct(Hzx_xn);
@@ -121,6 +125,12 @@ bool CreatePMLCoeffients(unsigned int ncx, unsigned int ncy) {
                 Cezyhx_xp.CreateStruct(Ezy_xp);
             }
             if (IsTMz) {
+                //Chyh_xp.CreateStruct(PMLCellxp, ny);
+                //Chyez_xp.CreateStruct(PMLCellxp, ny);
+                //Cezxe_xp.CreateStruct(Hzx_xp);
+                //Cezxhy_xp.CreateStruct(Hzx_xp);
+                //Cezye_xp.CreateStruct(Hzy_xp);
+                //Cezyhx_xp.CreateStruct(Hzy_xp);
                 Ceye_xp.CreateStruct(PMLCellxp, ny);
                 Ceyhz_xp.CreateStruct(PMLCellxp, ny);
                 Chzxh_xp.CreateStruct(Hzx_xp);
@@ -139,30 +149,42 @@ bool CreatePMLCoeffients(unsigned int ncx, unsigned int ncy) {
                 Cezxhy_yn.CreateStruct(Ezx_yn);
             }
             if (IsTMz) {
+                //Chxh_yn.CreateStruct(nx, PMLCellyn);
+                //Chxez_yn.CreateStruct(nx, PMLCellyn);
+                //Cezye_yn.CreateStruct(Hzy_yn);
+                //Cezyhx_yn.CreateStruct(Hzy_yn);
+                //Cezxe_yn.CreateStruct(Hzx_yn);
+                //Cezxhy_yn.CreateStruct(Hzx_yn);
                 Cexe_yn.CreateStruct(nx, PMLCellyn);
                 Cexhz_yn.CreateStruct(nx, PMLCellyn);
-                Chzxh_yn.CreateStruct(Hzx_yn.nx, Hzx_yn.ny);
-                Chzxey_yn.CreateStruct(Hzx_yn.nx, Hzx_yn.ny);
-                Chzyh_yn.CreateStruct(Hzy_yn.nx, Hzy_yn.ny);
-                Chzyex_yn.CreateStruct(Hzy_yn.nx, Hzy_yn.ny);
+                Chzxh_yn.CreateStruct(Hzx_yn);
+                Chzxey_yn.CreateStruct(Hzx_yn);
+                Chzyh_yn.CreateStruct(Hzy_yn);
+                Chzyex_yn.CreateStruct(Hzy_yn);
             }
         }
         if (IsPMLyp) {
             if (IsTEz) {
                 Chxh_yp.CreateStruct(nxm1, PMLCellyp);
                 Chxez_yp.CreateStruct(nxm1, PMLCellyp);
-                Cezye_yp.CreateStruct(Ezy_yp.nx, Ezy_yp.ny);
-                Cezyhx_yp.CreateStruct(Ezy_yp.nx, Ezy_yp.ny);
-                Cezxe_yp.CreateStruct(Ezx_yp.nx, Ezx_yp.ny);
-                Cezxhy_yp.CreateStruct(Ezx_yp.nx, Ezx_yp.ny);
+                Cezye_yp.CreateStruct(Ezy_yp);
+                Cezyhx_yp.CreateStruct(Ezy_yp);
+                Cezxe_yp.CreateStruct(Ezx_yp);
+                Cezxhy_yp.CreateStruct(Ezx_yp);
             }
             if (IsTMz) {
+                //Chxh_yp.CreateStruct(nx, PMLCellyp);
+                //Chxez_yp.CreateStruct(nx, PMLCellyp);
+                //Cezye_yp.CreateStruct(Hzy_yp);
+                //Cezyhx_yp.CreateStruct(Hzy_yp);
+                //Cezxe_yp.CreateStruct(Hzx_yp);
+                //Cezxhy_yp.CreateStruct(Hzx_yp);
                 Cexe_yp.CreateStruct(nx, PMLCellyp);
                 Cexhz_yp.CreateStruct(nx, PMLCellyp);
-                Chzxh_yp.CreateStruct(Hzx_yp.nx, Hzx_yp.ny);
-                Chzxey_yp.CreateStruct(Hzx_yp.nx, Hzx_yp.ny);
-                Chzyh_yp.CreateStruct(Hzy_yp.nx, Hzy_yp.ny);
-                Chzyex_yp.CreateStruct(Hzy_yp.nx, Hzy_yp.ny);
+                Chzxh_yp.CreateStruct(Hzx_yp);
+                Chzxey_yp.CreateStruct(Hzx_yp);
+                Chzyh_yp.CreateStruct(Hzy_yp);
+                Chzyex_yp.CreateStruct(Hzy_yp);
             }
         }
     }

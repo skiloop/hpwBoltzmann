@@ -97,7 +97,12 @@ void fdtdloop() {
             if (Step % CStep == 0)
                 CapFields(Step / CStep);
         }
+        if(ifWithDensity){
+		InterpEmax();
+        	Em.CaptData(CStep);
+	}
         if(ifWithDensity) UpdateDensity();
+        MatlabSimulation();
 
         cout << Step << '\t' << CurTime / 1e-9 << endl;
     }//END FOR

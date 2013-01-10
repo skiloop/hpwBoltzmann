@@ -1,6 +1,7 @@
 CXX = g++
 #CXXFLAGS = -g -D_DEBUG -Wall -DMATLAB_SIMULATION 
-CXXFLAGS = -DDEBUG -Wall -g #-DMATLAB_SIMULATION 
+#CXXFLAGS = -DDEBUG -Wall -g -D_SOURCE_TMX_=1
+CXXFLAGS = -DDEBUG -Wall -g -DMATLAB_SIMULATION -D_SOURCE_TMX_=1
 LFLAGS = -g -O3
 SRC=src
 MATLAB_ROOT=/opt/Matlab/R2011a
@@ -25,5 +26,8 @@ hpw: $(OBJS) $(SRC)/*.cpp
 	$(CXX) $(LFLAGS) -o $@  $(OBJS) $(LIB)
 $(OBJS):%.o:$(SRC)/%.cpp 
 	$(CXX) $(CXXFLAGS) -c $< -o $@ $(INC)
+$(SRC)/updatedensity.cpp:$(SRC)/microdef.h
+$(SRC)/%..cpp:$(SRC)/%.h $(SRC)/microdef.h
+
 clean:
 	-rm -f *.o hpw

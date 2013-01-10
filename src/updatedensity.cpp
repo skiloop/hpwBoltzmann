@@ -121,7 +121,8 @@ void UpdateDensity1210() {
     for (i = mt; i < Ne.nx - mt; i++) {
         for (j = mt; j < Ne.ny - mt; j++) {
             // get Em at (i,j)
-            EmDivN=getEmax(i,j)/N_air/1e-21;
+            //EmDivN=Em.data[i][j]/N_air;
+            EmDivN=Em.data[i][j]/N_air/1e-21;
             // compute niu_i
             niu_i = ViDivN.Interp(EmDivN)*N_air;
             // compute niu_a
@@ -134,10 +135,11 @@ void UpdateDensity1210() {
 
             // calculate effective diffusion coefficient deff
 	    if (Ne.data[i][j]<=0.0){
-		    deff =  miu2DivE*Te;//mu_e*2*Te/e;//8.73e-2; //
+		    deff = miu2DivE*Te;//mu_e*2*Te/e;//8.73e-2; //
 	    }else{
 		    kasi = eps_m_e_miu * niu_i /Ne.data[i][j];
-		    De = mu_e*2*Te/e;//8.73e-2; //
+		    De = miu2DivE*Te;//mu_e*2*Te/e;//8.73e-2; //
+		    //De = mu_e*2*Te/e;//8.73e-2; //
 		    Da = De / MueDivMui;
 		    deff = (kasi*De + Da)/(kasi + 1);
 	    }
@@ -149,8 +151,10 @@ void UpdateDensity1210() {
             opt3 = 1+dt_F*(niu_a+rei*Ne.data[i][j]);
             Ne.data[i][j] = (Ne.data[i][j]*opt1+opt2)/opt3;
 #ifdef DEBUG
-	    if (i==midx&&j==midy)
-		    cout << "Debug:" << getEmax(i,j)<<'\t'<< EmDivN <<'\t'<<niu_i<<'\t'<<niu_a<<'\t'<<energy <<endl;
+	    //if (i==midx&&j==midy)
+	    //    cout << "Debug:" << getEmax(i,j)<<'\t'<< EmDivN <<'\t'<<niu_i<<'\t'<<niu_a<<'\t'<<energy <<endl;
+	    //if (i==Deff_Store_Index_x[5]&&j==Deff_Store_Index_y[5])
+	    //   cout << Ne.data[i][j] << endl;
 #endif
 
             if (maxne < Ne.data[i][j]) {
@@ -161,9 +165,9 @@ void UpdateDensity1210() {
         }
     }
     DensityBound(Ne, m*tpis, 0);
-    cout << maxne << '\t' << mi << '\t' << mj << '\t';
-    cout << Ne.data[Deff_Store_Index_x[5]][Deff_Store_Index_y[5]] << '\t' << Ne.data[midi][pci] << '\t';
-    cout << "Nemiddle" << Ne.data[Ne.nx/2][Ne.ny/2] << '\t';
+    //cout << maxne << '\t' << mi << '\t' << mj << '\t';
+    //cout << Ne.data[Deff_Store_Index_x[5]][Deff_Store_Index_y[5]] << '\t' << Ne.data[midi][pci] << '\t';
+    //cout << "Nemiddle " << Ne.data[Ne.nx/2][Ne.ny/2] << '\t';
     deff_file << endl;
     denfile << endl;
 #ifdef _DEBUG
@@ -287,7 +291,7 @@ void UpdateDensity() {
         UpdateDenDeff();
         break;
     case 4:
-        InterpEmax();
+        //InterpEmax();
         UpdateDensity1210();
         break;
     default:

@@ -16,15 +16,63 @@ extern unsigned pis, pie, pjs, pje;
 void InterpEmax() {
     unsigned i,j;
     unsigned im,jm;
+    unsigned jc,ic;
+    unsigned mi,mj,ni,nj;
+    MyDataF minEm=0,maxEm=0,eabs;
+    if(IsTEz){
     for(i=m2; i<Em.nx-m2; i++) {
         for(j=m2; j<Em.ny-m2; j++) {
-            if((i+m2)%m!=0 && (j+m2)%m!=0) {
-                im = ((i-m2)/m)*m+m2;
-                jm = ((j-m2)/m)*m+m2;
-                Em.data[i][j] = ((im+m-i)*(jm-m-j)*Em.data[im][jm]
-                                 +(im+m-i)*(j-jm)*Em.data[im][jm+m]+(i-im)*(jm+m-j)*Em.data[im+m][jm]+(im+m-i)*(jm+m-j)*Em.data[im+m][jm+m])/(m*m);
+		ic=i%m;
+		jc=j%m;
+            if((ic!=0||jc!=0)) {
+		    if(ic==0&&jc==0)
+			    ic=ic;
+                im = (i/m)*m;
+                jm = (j/m)*m;
+                Em.data[i][j] = ((im+m-i)*(jm+m-j)*Em.data[im][jm]
+                                 +(im+m-i)*(j-jm)*Em.data[im][jm+m]+(i-im)*(jm+m-j)*Em.data[im+m][jm]+(i-im)*(j-jm)*Em.data[im+m][jm+m])/(m*m);
+		eabs = fabs(Em.data[i][j]);
+		if (eabs<minEm){
+			minEm=eabs;
+			ni = i;
+			nj = j;
+		}
+		    if (eabs>maxEm){
+			    maxEm=eabs;
+			    mi = i;
+			    mj = j;
+		    }
             }
         }
+    }
+    }
+    if(IsTMz){
+    for(i=m2; i<Em.nx-m2; i++) {
+        for(j=m2; j<Em.ny-m2; j++) {
+		ic=(i+m2)%m;
+		jc=(j+m2)%m;
+            if((ic!=0||jc!=0)) {
+		    if(ic==0&&jc==0)
+			    ic=ic;
+                im = ((i-m2)/m)*m+m2;
+                jm = ((j-m2)/m)*m+m2;
+                Em.data[i][j] = ((im+m-i)*(jm+m-j)*Em.data[im][jm]
+                                 +(im+m-i)*(j-jm)*Em.data[im][jm+m]+(i-im)*(jm+m-j)*Em.data[im+m][jm]+(i-im)*(j-jm)*Em.data[im+m][jm+m])/(m*m);
+		eabs = fabs(Em.data[i][j]);
+		if (eabs<minEm){
+			minEm=eabs;
+			ni = i;
+			nj = j;
+		}
+		    if (eabs>maxEm){
+			    maxEm=eabs;
+			    mi = i;
+			    mj = j;
+		    }
+            }
+        }
+    }
+    cout <<"Interp:" << maxEm << '\t' << mi << '\t' << mj << '\t'<<  minEm << '\t' << ni << '\t' << nj << endl;
     }
 
 }
@@ -34,6 +82,9 @@ void CalEmax() {
     unsigned im,jm;
     MyDataF eabs;
 #ifdef DEBUG
+    MyDataF minEm=0;
+    unsigned ni = 0;
+    unsigned nj = 0;
     MyDataF maxEm=0;
     unsigned mi = 0;
     unsigned mj = 0;
@@ -49,6 +100,11 @@ void CalEmax() {
                 if(eabs>Em.data[im][jm]){
 			Em.data[im][jm] = eabs;
 #ifdef DEBUG
+			if (eabs<minEm){
+				minEm=eabs;
+				ni = im;
+				nj = jm;
+			}
 			if (eabs>maxEm){
 				maxEm=eabs;
 				mi = im;
@@ -66,6 +122,11 @@ void CalEmax() {
                 if(eabs>Em.data[im][jm]){
                     Em.data[im][jm] = eabs;
 #ifdef DEBUG
+		if (eabs<minEm){
+			minEm=eabs;
+			ni = im;
+			nj = jm;
+		}
 		    if (eabs>maxEm){
 			    maxEm=eabs;
 			    mi = im;
@@ -77,7 +138,7 @@ void CalEmax() {
         }
     }
 #ifdef DEBUG
-    cout << "maxEm: " << maxEm << '\t' << mi << '\t' << mj << endl;
+    cout << "Cal:"<< maxEm << '\t' << mi << '\t' << mj << '\t' <<  minEm << '\t' << ni << '\t' << nj << endl;
 #endif
 }
 

@@ -189,7 +189,7 @@ bool MyStruct::CheckStruct() {
     return true;
 }
 
-void MyStruct::CaptData(const unsigned num, unsigned p) {
+void MyStruct::CaptData(const unsigned num,unsigned p) {
     unsigned i, j;
 
     stringstream ss;
@@ -265,6 +265,7 @@ int MyStruct::InitMatlabEngine() {
         cerr << "Can't start matlab engine!" << endl;
         exit(-1);
     }
+    engSetVisible (ep,0);
 #endif
     return 0;
 
@@ -341,3 +342,4 @@ void MyStruct::InitPlot() {
     mxDestroyArray(mxStr);
 #endif
 }
+

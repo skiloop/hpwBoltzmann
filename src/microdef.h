@@ -24,8 +24,17 @@
 #define FINE_GRID_SIZE 4
 #define SCATTERED_FORMATION
 
-#define _SOURCE_TMX_ 1
+#ifndef _SOURCE_TEX_
+// if not define _SOURCE_TMX_ then define _SOURCE_TEX_=1
+#ifndef _SOURCE_TMX_
+#define _SOURCE_TEX_ 1
+#define _SOURCE_TMX_ 0
+#elif (_SOURCE_TMX_!=0)
 #define _SOURCE_TEX_ 0
+#else
+#define _SOURCE_TEX_ 1
+#endif
+#endif // 
 
 #define E_0 6e6
 #define NE0 1e13
