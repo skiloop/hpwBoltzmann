@@ -40,6 +40,7 @@
 ////////////////////////
 // wave type default
 ///////////////////////
+#define _SOURCE_TMZ_ 1
 #ifndef _SOURCE_TEZ_
 // if not define _SOURCE_TMZ_ then define _SOURCE_TEZ_=1
 #ifndef _SOURCE_TMZ_
@@ -56,7 +57,7 @@
 
 #define FREQUENCY 110E9
 #define MAX_NE 1E29
-#define INC_ANGLE 0.0*M_PI
+#define INC_ANGLE 0.5*M_PI
 
 
 

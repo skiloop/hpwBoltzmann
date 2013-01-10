@@ -271,7 +271,7 @@ int MyStruct::InitMatlabEngine() {
         cerr << "Can't start matlab engine!" << endl;
         exit(-1);
     }
-    engSetVisible (ep,0);
+    engSetVisible (ep,1);
 #endif
     return 0;
 

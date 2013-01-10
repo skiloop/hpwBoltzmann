@@ -98,10 +98,10 @@ void fdtdloop() {
                 CapFields(Step / CStep);
         }
         if(ifWithDensity){
-		InterpEmax();
-		Pem=Em;
-        	Em.CaptData(CStep);
-	}
+			InterpEmax();
+			Pem=Em;
+			Em.CaptData(CStep);
+		}
         if(ifWithDensity) UpdateDensity();
         MatlabSimulation();
 
