@@ -20,5 +20,8 @@ compress
 # dat-file in resdata
 resdata/*
 
+# object excuted file
+hpw
+
 
 
