@@ -387,6 +387,7 @@ void CreateFields() {
         Pne.SetName(path + "pne");
         Ue.SetName(path + "ue");
     	Em.CreateStruct(Ne);
+    	Pem.CreateStruct(Em);
     	Em.SetName("Emax");
         Em.SetName(path + "Emax");
     }

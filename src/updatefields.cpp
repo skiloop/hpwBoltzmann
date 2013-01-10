@@ -12,6 +12,7 @@
 #include "updatefields.h"
 
 extern unsigned pis, pie, pjs, pje;
+const MyDataF RN_air = N_air*1e-21;
 
 void InterpEmax() {
     unsigned i,j;
@@ -143,7 +144,7 @@ void CalEmax() {
 }
 
 MyDataF getEmax(int i, int j) {
-    return Em.data[i][j];
+    return Pem.data[i][j]/RN_air;
 }
 
 
@@ -194,7 +195,43 @@ void UpdateMField() {
     }
 }
 
-void UpdateUField() {
+void UpdateUField1210() {
+    unsigned i, j, im, jm;
+    MyDataF tvc;
+    MyDataF alpha, beta,niu_c,EmDivN;
+
+    for (i = 0, im = m2; i < Ux.nx; im += m, i++) {
+        for (j = 0, jm = 0; j < Ux.ny; jm += m, j++) {
+            // get EmDivN at (i,j)
+            EmDivN=getEmax(i,j);
+            // compute niu_c
+            niu_c = VcDivN.Interp(EmDivN)*N_air;
+
+            tvc = niu_c * dt;
+            //tvc = Ne.data[im][jm] * vc.Interp(em);
+            alpha = (2.0 - tvc) / (2.0 + tvc);
+            beta = dt_me_e_2 / (2.0 + tvc);
+            Ux.data[i][j] = alpha * Ux.data[i][j] + beta * Ne.data[im][jm] * Ex.data[i][j];
+        }
+    }
+    for (i = 0, im = 0; i < Uy.nx; im += m, i++) {
+        for (j = 0, jm = m2; j < Uy.ny; j++, jm += m) {
+            // get EmDivN at (i,j)
+            EmDivN=getEmax(i,j);
+            // compute niu_c
+            niu_c = VcDivN.Interp(EmDivN)*N_air;
+
+            tvc = niu_c * dt;
+	    
+            //tvc = Ne.data[im][jm] * vc.Interp(em);
+            alpha = (2.0 - tvc) / (2.0 + tvc);
+            beta = dt_me_e_2 / (2.0 + tvc);
+            Uy.data[i][j] = alpha * Uy.data[i][j] + beta * Ne.data[im][jm] * Ey.data[i][j];
+        }
+    }
+
+}
+void UpdateUFieldOther() {
     unsigned i, j, im, jm;
     MyDataF tvc, eps;
     MyDataF alpha, beta;
@@ -274,3 +311,9 @@ void UpdateUCoeffiecients() {
 }
 
 
+void UpdateUField() {
+	if(denFormula==4){
+		UpdateUField1210();
+	}else
+		UpdateUFieldOther();
+}

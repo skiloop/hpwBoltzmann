@@ -59,6 +59,7 @@ FileInterp VcDivN(ArrayCount,EmDivNTxt,vcTxt);
 FileInterp ViDivN(ArrayCount,EmDivNTxt,viTxt);
 FileInterp EnergyDivN(ArrayCount,EmDivNTxt,EnergyTxt);
 MyStruct Em;
+MyStruct Pem;
 
 
 //update coefficients

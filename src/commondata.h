@@ -41,6 +41,7 @@ extern FileInterp VcDivN;
 extern FileInterp ViDivN;
 extern FileInterp EnergyDivN;
 extern MyStruct Em;
+extern MyStruct Pem;
 
 
 extern MyDataF De;

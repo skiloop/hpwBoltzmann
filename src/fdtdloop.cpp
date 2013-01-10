@@ -99,6 +99,7 @@ void fdtdloop() {
         }
         if(ifWithDensity){
 		InterpEmax();
+		Pem=Em;
         	Em.CaptData(CStep);
 	}
         if(ifWithDensity) UpdateDensity();

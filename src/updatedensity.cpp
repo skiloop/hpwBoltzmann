@@ -120,9 +120,8 @@ void UpdateDensity1210() {
     Pne = Ne;
     for (i = mt; i < Ne.nx - mt; i++) {
         for (j = mt; j < Ne.ny - mt; j++) {
-            // get Em at (i,j)
-            //EmDivN=Em.data[i][j]/N_air;
-            EmDivN=Em.data[i][j]/N_air/1e-21;
+            // get EmDivN at (i,j)
+            EmDivN=getEmax(i,j);
             // compute niu_i
             niu_i = ViDivN.Interp(EmDivN)*N_air;
             // compute niu_a
