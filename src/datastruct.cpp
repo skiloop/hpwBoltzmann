@@ -298,9 +298,11 @@ void MyStruct::PlotArrays() {
 
 #ifdef MATLAB_SIMULATION
     MyDataF *pData = (MyDataF*) malloc(nx * ny * sizeof (MyDataF));
-    for (unsigned i = 0; i < nx; i++)
-        for (unsigned j = 0; j < ny; j++)
+	for (unsigned i = 0; i < nx; i++){
+		for (unsigned j = 0; j < ny; j++){
             pData[i * ny + j] = data[i][j];
+		}
+	}
     engPutVariable(ep, "ind", num);
     engEvalString(ep, "ind=int32(ind);");
     memcpy(mxGetPr(MyArray), pData, nx * ny * sizeof (MyDataF));
@@ -329,9 +331,11 @@ void MyStruct::InitPlot() {
     engPutVariable(ep, "name", mxStr);
     engEvalString(ep, "obj(ind).name=name;");
 
-    for (unsigned i = 0; i < nx; i++)
-        for (unsigned j = 0; j < ny; j++)
+	for (unsigned i = 0; i < nx; i++){
+		for (unsigned j = 0; j < ny; j++){
             pData[i * ny + j] = data[i][j];
+		}
+	}
     memcpy(mxGetPr(MyArray), pData, nx * ny * sizeof (MyDataF));
     engPutVariable(ep, "array", MyArray);
 
