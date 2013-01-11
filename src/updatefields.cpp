@@ -179,20 +179,42 @@ void UpdateEField() {
             }
         }
     }
-
+	if(IsTEz){
+		Pez = Ez;
+		for (i = pis; i < pie; i++) {
+            for (j = pjs; j < pje; j++) {
+                Ez.data[i][j] += cezhy * (Hy.data[i][j] - Hy.data[i - 1][j])
+					+cezhx * (Hx.data[i][j] - Hx.data[i][j - 1])
+					+ cezuz * Uz.data[i][j];
+            }
+        }
+	}
 }
 
 void UpdateMField() {
 
     unsigned int i, j;
-
-    for (i = pis; i < pie; i++) {
-        for (j = pjs; j < pje; j++) {
-            Hz.data[i][j] +=
-                chzex * (Ex.data[i][j + 1] - Ex.data[i][j]) +
-                chzey * (Ey.data[i + 1][j] - Ey.data[i][j]);
-        }
-    }
+	if(IsTMz){
+		for (i = pis; i < pie; i++) {
+			for (j = pjs; j < pje; j++) {
+				Hz.data[i][j] +=
+					chzex * (Ex.data[i][j + 1] - Ex.data[i][j]) +
+					chzey * (Ey.data[i + 1][j] - Ey.data[i][j]);
+			}
+		}
+	}
+	if(IsTEz){
+		for(i=0;i<Hx.nx;i++){
+				for(j=pjs;j<pje;j++){
+					Hx.data[i][j]=Hx.data[i][j]+chxez*(Ez.data[i][j+1]-Ez.data[i][j]);
+				}
+		}
+		for(i=pis;i<pie;i++){
+			for(j=0;j<Hy.ny;j++){
+				Hy.data[i][j]=Hy.data[i][j]+chyez*(Ez.data[i+1][j]-Ez.data[i][j]);
+			}
+		}
+	}
 }
 
 void UpdateUField1210() {

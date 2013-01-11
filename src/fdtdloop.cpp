@@ -78,14 +78,16 @@ void fdtdloop() {
             UpdateMField();
             //Hz.PlotArrays(ep);
             ApplyConnectingM(CurTime);
-            UpdMagFldForPML_TMz(Hz, Ex, Ey);
+			UpdateMFieldForPML(Hx,Hy,Hz,Ex,Ey,Ez);
+            //UpdMagFldForPML_TMz(Hz, Ex, Ey);
             //U Field
             if(ifWithDensity)UpdateUField();
             //Erms
             CurTime += half_dt;
             UpdateEField();
             ApplyConnectingE(CurTime);
-            UpdEltFldForPML_TMz(Ex, Ey, Hz);
+			UpdateEFieldForPML(Ex,Ey,Ez,Hx,Hy,Hz);
+            //UpdEltFldForPML_TMz(Ex, Ey, Hz);
 
             if(ifWithDensity) {
                 if(denFormula==4)CalEmax();

@@ -25,13 +25,14 @@ MyStruct Pex; //Ex at previous step
 MyStruct Pey; //Ey at previous step
 MyStruct Pne; //Density Ne at previous step
 MyStruct ppne;
+MyStruct beta;
 
 MyStruct Pez; //Ez at previous step
 MyStruct Ceex,Ceey,Ceez;
 MyStruct Cevx,Cevy,Cevz;
 MyStruct Cehx,Cehy,Cehz;
 //MyDataF Chxez,Chyez,Chzey,Chzex;
-MyStruct Hx,Hy,Ez,Vex,Vez,Vey;
+MyStruct Hx,Hy,Ez,Vex,Vez,Vey,Uz;
 
 MyStruct Deff, Niu_i, Niu_a;
 int denFormula;
@@ -69,11 +70,12 @@ FileInterp EnergyDivN(ArrayCount,EmDivNTxt,EnergyTxt);
 MyStruct Em;
 MyStruct Pem;
 
-MyDataF chxez,chyez;
+MyDataF chxez,chyez,Cve,alpha;
 //update coefficients
 MyDataF chzex, chzey; //coefficients updating Hz
 MyDataF cexhz, cexux; //coefficients updating Ex
 MyDataF ceyhz, ceyuy; //coefficients updating Ey
+MyDataF cezhx,cezhy, cezuz; //coefficients updating Ez
 
 MyDataF De;
 MyDataF Da;

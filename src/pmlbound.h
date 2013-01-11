@@ -39,7 +39,7 @@ void UpdEltFldForPML_TMz(MyStruct &ex, MyStruct &ey, const MyStruct &hz);
  *update electric fields at PML regions
  *TMz
  */
-void UpdEltFldForPML_TEz(MyStruct &ez, const MyStruct hx, const MyStruct &hy);
+void UpdEltFldForPML_TEz(MyStruct &ez, const MyStruct &hx, const MyStruct &hy);
 void UpdateMFieldForPML(MyStruct &hx, MyStruct &hy, MyStruct &hz, const MyStruct &ex, const MyStruct &ey, const MyStruct &ez);
 void UpdateEFieldForPML(MyStruct &ex, MyStruct &ey, MyStruct &ez, const MyStruct &hx, const MyStruct &hy, const MyStruct &hz);
 void FreePMLSpace();

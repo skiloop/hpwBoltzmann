@@ -22,12 +22,13 @@ extern MyStruct Pey; //Ey at previous step
 extern MyStruct Pne; //Density Ne at previous step
 extern MyStruct Pux;
 extern MyStruct Puy;
+extern MyStruct beta;
 
 extern MyStruct Pez; //Ez at previous step
 extern MyStruct Ceex,Ceey,Ceez;
 extern MyStruct Cevx,Cevy,Cevz;
 extern MyStruct Cehx,Cehy,Cehz;
-extern MyStruct Hx,Hy,Ez,Vex,Vez,Vey;
+extern MyStruct Hx,Hy,Ez,Vex,Vez,Vey,Uz;
 extern MyDataF chxez,chyez,Chzey,Chzex;
 extern MyStruct ppne,Deff,Niu_i,Niu_a;
 extern int denFormula;
@@ -35,6 +36,7 @@ extern int denFormula;
 extern MyDataF chzex, chzey; //coefficients updating Hz
 extern MyDataF cexhz, cexux; //coefficients updating Ex
 extern MyDataF ceyhz, ceyuy; //coefficients updating Ey
+extern MyDataF cezhx,cezhy, cezuz; //coefficients updating Ez
 
 //Fields need to interpolate
 extern FileInterp vi;
@@ -78,7 +80,7 @@ const unsigned Density_Time_Step = DEN_TIME_STEPS;
 
 
 extern MyDataF rei;
-
+extern MyDataF Cve,alpha;
 
 //FDTD DATA
 extern MyDataF dt, dt_F, dt_M;
