@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="84">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df name="hpwBoltzmann" root=".">
+      <df name="boltzmann">
+      </df>
+      <df name="compress">
+      </df>
+      <df name="interp">
+      </df>
+      <df name="resdata">
+        <in>test.cpp</in>
+      </df>
+      <df name="src">
+        <in>FileInterp.cpp</in>
+        <in>FileInterp.h</in>
+        <in>InonizationFormula.cpp</in>
+        <in>InonizationFormula.h</in>
+        <in>bounddata.cpp</in>
+        <in>bounddata.h</in>
+        <in>commondata.cpp</in>
+        <in>commondata.h</in>
+        <in>connectingdef.cpp</in>
+        <in>connectingdef.h</in>
+        <in>datastruct.cpp</in>
+        <in>datastruct.h</in>
+        <in>fdtdloop.cpp</in>
+        <in>fdtdloop.h</in>
+        <in>freedata.h</in>
+        <in>initials.cpp</in>
+        <in>initials.h</in>
+        <in>interp.cpp</in>
+        <in>interp.h</in>
+        <in>loadfiles.m</in>
+        <in>main.cpp</in>
+        <in>matlabsim.cpp</in>
+        <in>matlabsim.h</in>
+        <in>microdef.h</in>
+        <in>pmlbound.cpp</in>
+        <in>pmlbound.h</in>
+        <in>updatedensity.cpp</in>
+        <in>updatefields.cpp</in>
+        <in>updatefields.h</in>
+      </df>
+      <df name="tp1">
+        <df name="boltzmann">
+        </df>
+        <df name="interp">
+        </df>
+        <df name="resdata">
+        </df>
+      </df>
+      <in>testread.cpp</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="重要文件"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>/opt/Matlab/R2011a/extern/include</pElem>
+              <pElem>.</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>DEBUG</Elem>
+              <Elem>MATLAB_SIMULATION</Elem>
+              <Elem>_SOURCE_TMX_=0</Elem>
+            </preprocessorList>
+          </ccTool>
+        </makeTool>
+      </makefileType>
+      <item path="resdata/test.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+      <item path="src/InonizationFormula.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+      <item path="src/InonizationFormula.h" ex="true" tool="3" flavor2="0">
+      </item>
+      <item path="src/loadfiles.m" ex="true" tool="0" flavor2="0">
+      </item>
+      <item path="testread.cpp" ex="true" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
