@@ -12,3 +12,4 @@
  CStep;
  denFormula;
  ifWithDensity;
+ IsTEz Wave;

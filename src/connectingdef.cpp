@@ -344,7 +344,7 @@ void ApplyConnectingE(const MyDataF t) {
     int ind;
     UpdateConnectingE(t);
     if (IsTEz) {
-		unsigned int i;
+		int i;
 		for(ind = tpis,i=0;ind<=tpie;ind++,i++){
 			//bottom 
 			d		=	Dhxb[i];

@@ -141,11 +141,22 @@ void InitFDTDProblem(const string &fname) {
             cout << setw(width) << "Density Formula:" << denFormula << endl;
             infile >> ifWithDensity;
             cout << setw(width) << "if with Density:"<<ifWithDensity <<endl;
+            infile >> IsTEz;
+	    if(IsTEz<0)IsTEz = 1;
+	    if(IsTEz)IsTMz=0;
+	    else IsTMz=1;
+            cout << setw(width) << "if is TEz wave:"<<IsTEz<<endl;
             infile.close();
         } catch (exception &e) {
             cerr << e.what() << endl;
             exit(-1);
         }
+        //wave type
+	//if (IsTMz==0 && IsTEz==0){
+	//        IsTMz = _SOURCE_TMZ_;
+        //	IsTEz = _SOURCE_TEZ_;
+	//}
+
         if (f < 10)
             //initial wave parameters
             f = FREQUENCY;
@@ -176,10 +187,6 @@ void InitFDTDProblem(const string &fname) {
             Hy0 = Ratio_y*H0;
             Ez0 = E0;
         }
-
-        //wave type
-        IsTMz = _SOURCE_TMZ_;
-        IsTEz = _SOURCE_TEZ_;
 
         //number of wavelength in domain
         if (NumOfWaveLength > 1000)
@@ -357,7 +364,7 @@ void InitCeh(){
 	if (ifWithDensity)
 	{
 	
-	unsigned int i,j,index=0;
+	unsigned int i,j;
 	unsigned int im,jm;
 	//MyDataF temp=dt/eps_0;
 	if(IsTMz){		
@@ -393,7 +400,7 @@ void InitCev(MyDataF alpha_ev){
 	if (ifWithDensity)
 	{
 	
-	unsigned int i,j,index=0;
+	unsigned int i,j;
 	MyDataF temp;
 	unsigned int im,jm;
 
