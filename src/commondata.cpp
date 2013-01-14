@@ -21,10 +21,19 @@ MyStruct Ux;
 MyStruct Uy;
 MyStruct Ue; //
 MyStruct Ne; //density field component
-MyStruct Pex; //Ey at previous step
+MyStruct Pex; //Ex at previous step
 MyStruct Pey; //Ey at previous step
 MyStruct Pne; //Density Ne at previous step
 MyStruct ppne;
+MyStruct beta;
+
+MyStruct Pez; //Ez at previous step
+MyStruct Ceex,Ceey,Ceez;
+MyStruct Cevx,Cevy,Cevz;
+MyStruct Cehx,Cehy,Cehz;
+//MyDataF Chxez,Chyez,Chzey,Chzex;
+MyStruct Hx,Hy,Ez,Vex,Vez,Vey,Uz;
+
 MyStruct Deff, Niu_i, Niu_a;
 int denFormula;
 //Gas Density at sea level
@@ -61,20 +70,21 @@ FileInterp EnergyDivN(ArrayCount,EmDivNTxt,EnergyTxt);
 MyStruct Em;
 MyStruct Pem;
 
-
+MyDataF chxez,chyez,Cve,alpha;
 //update coefficients
 MyDataF chzex, chzey; //coefficients updating Hz
 MyDataF cexhz, cexux; //coefficients updating Ex
 MyDataF ceyhz, ceyuy; //coefficients updating Ey
+MyDataF cezhx,cezhy, cezuz; //coefficients updating Ez
 
 MyDataF De;
 MyDataF Da;
 MyDataF D_kasi_max;
 MyDataF mu_e;
 MyDataF mu_i;
-MyDataF p = 760.0;
+MyDataF p = DEFAULT_AIR_PRESSURE;
 
-MyDataF rei = -1.0;
+MyDataF rei = DEFAULT_REI;
 
 unsigned int CStep;
 //FDTD DATA
@@ -91,7 +101,7 @@ MyDataF DtfDivDsfs; //dt_F/ds_F/ds_F
 MyDataF eps_m_e_miu; //eps_0 / (e * (mu_e + mu_i))
 MyDataF dt2; //dt*2
 MyDataF ds_Pow_2; //ds_F*ds_F
-MyDataF MueDivMui=100.0;
+MyDataF MueDivMui=DEFAULT_MIU_DIV;
 
 unsigned m, m2;
 
@@ -135,6 +145,6 @@ unsigned Deff_Store_Index_x[10], Deff_Store_Index_y[10];
 unsigned minSI, minSJ, maxSI, maxSJ;
 unsigned midi, midj, pci;
 
-int ifWithDensity=0;// if with density or not
+int ifWithDensity = IF_WITH_DENSITY;// if with density or not
 
 #endif

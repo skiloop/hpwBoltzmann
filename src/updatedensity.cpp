@@ -121,7 +121,7 @@ void UpdateDensity1210() {
     for (i = mt; i < Ne.nx - mt; i++) {
         for (j = mt; j < Ne.ny - mt; j++) {
             // get EmDivN at (i,j)
-            EmDivN=getEmax(i,j);
+            EmDivN=getEmDivN(i,j);
             // compute niu_i
             niu_i = ViDivN.Interp(EmDivN)*N_air;
             // compute niu_a
@@ -151,7 +151,7 @@ void UpdateDensity1210() {
             Ne.data[i][j] = (Ne.data[i][j]*opt1+opt2)/opt3;
 #ifdef DEBUG
 	    //if (i==midx&&j==midy)
-	    //    cout << "Debug:" << getEmax(i,j)<<'\t'<< EmDivN <<'\t'<<niu_i<<'\t'<<niu_a<<'\t'<<energy <<endl;
+	    //    cout << "Debug:" << getEmDivN(i,j)<<'\t'<< EmDivN <<'\t'<<niu_i<<'\t'<<niu_a<<'\t'<<energy <<endl;
 	    //if (i==Deff_Store_Index_x[5]&&j==Deff_Store_Index_y[5])
 	    //   cout << Ne.data[i][j] << endl;
 #endif

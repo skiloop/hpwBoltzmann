@@ -74,34 +74,51 @@ void fdtdloop() {
         {
             //MyDataF ezl,ezlr;
             CurTime += half_dt;
+			//
+			//Ez.data[tpie-2][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
+			//Ez.data[tpie-1][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
+			//Ez.data[tpie-2][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
+			//Ez.data[tpie-1][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
+
+			//Ez.data[Ez.nx/4*3][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
+			//Ez.data[Ez.nx/4*3+1][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
+			//Ez.data[Ez.nx/4*3][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
+			//Ez.data[Ez.nx/4*3+1][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
             //E Field
             UpdateMField();
+                //MatlabSimulation();
             //Hz.PlotArrays(ep);
             ApplyConnectingM(CurTime);
-            UpdMagFldForPML_TMz(Hz, Ex, Ey);
+                //MatlabSimulation();
+			UpdateMFieldForPML(Hx,Hy,Hz,Ex,Ey,Ez);
+                MatlabSimulation();
+            //UpdMagFldForPML_TMz(Hz, Ex, Ey);
             //U Field
             if(ifWithDensity)UpdateUField();
             //Erms
             CurTime += half_dt;
             UpdateEField();
-            ApplyConnectingE(CurTime);
-            UpdEltFldForPML_TMz(Ex, Ey, Hz);
+                 //MatlabSimulation();
+           ApplyConnectingE(CurTime);
+                 //MatlabSimulation();
+			UpdateEFieldForPML(Ex,Ey,Ez,Hx,Hy,Hz);
+            //UpdEltFldForPML_TMz(Ex, Ey, Hz);
 
             if(ifWithDensity) {
                 if(denFormula==4)CalEmax();
                 else UpdateUeField();
             }
 
-            if (Step % PlotStep == 0)
+            //if (Step % PlotStep == 0)
                 MatlabSimulation();
             if (Step % CStep == 0)
                 CapFields(Step / CStep);
         }
         if(ifWithDensity){
-		InterpEmax();
-		Pem=Em;
-        	Em.CaptData(CStep);
-	}
+			InterpEmax();
+			Pem=Em;
+			Em.CaptData(CStep);
+		}
         if(ifWithDensity) UpdateDensity();
         MatlabSimulation();
 

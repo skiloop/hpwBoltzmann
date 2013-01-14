@@ -9,9 +9,16 @@ void MatlabSimulation() {
 
     //Ex.PlotArrays();
     //Ey.PlotArrays();
-    Hz.PlotArrays();
-    Ex.PlotArrays();
-    Ey.PlotArrays();
+	if(IsTMz){
+		Hz.PlotArrays();
+		Ex.PlotArrays();
+		Ey.PlotArrays();
+	}
+	if(IsTEz){
+		Ez.PlotArrays();
+		Hx.PlotArrays();
+		Hy.PlotArrays();
+	}
     if(ifWithDensity) {
 	Em.PlotArrays();
         Ue.PlotArrays();
@@ -24,9 +31,17 @@ void EndSimulation() {
 
     //Ex.ClearSim();
     //Ey.ClearSim();
-    Ex.ClearSim();
-    Ey.ClearSim();
-    Hz.ClearSim();
+	if(IsTMz){
+		Hz.ClearSim();
+		Ex.ClearSim();
+		Ey.ClearSim();
+	}
+	if(IsTEz){
+		Ez.ClearSim();
+		Hx.ClearSim();
+		Hy.ClearSim();
+	}
+
     if(ifWithDensity) {
         Ne.ClearSim();
         Em.ClearSim();
@@ -37,11 +52,17 @@ void EndSimulation() {
 void InitMatlabEngine() {
     MyStruct::InitMatlabEngine();
 
-    //Ex.InitPlot("Ex");
-    //Ey.InitPlot("Ey");
-    Ex.InitPlot();
-    Ey.InitPlot();
-    Hz.InitPlot();
+ 	if(IsTMz){
+		Hz.InitPlot();
+		Ex.InitPlot();
+		Ey.InitPlot();
+	}
+	if(IsTEz){
+		Ez.InitPlot();
+		Hx.InitPlot();
+		Hy.InitPlot();
+	}
+
     if(ifWithDensity) {
         Ne.InitPlot();
         Em.InitPlot();

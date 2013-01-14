@@ -51,6 +51,7 @@ MyDataF Ceyhz;
 MyDataF Cexhz;
 MyDataF Chyez;
 MyDataF Chxez;
+MyDataF Cezhx,Cezhy;
 
 MyDataF delays(MyDataF px, MyDataF py) {
     return ((px - xs) * cos_phi + (py - ys) * sin_phi);
@@ -95,29 +96,52 @@ void CalculateDelay(MyDataF IncAngle) {
     sin_phi = sin(IncAngle);
 
     IncAngle = IncAngle - 2 * M_PI * (floor(IncAngle / (2 * M_PI)));
-
-    if ((IncAngle <= 0.5 * M_PI)) {
-        xs = tpis;
-        ys = tpjs;
-        xe = tpie;
-        ye = tpje;
-    } else if ((IncAngle <= M_PI)) {
-        xs = tpie;
-        ys = tpjs;
-        xe = tpis;
-        ye = tpje;
-    } else if ((IncAngle <= 1.5 * M_PI)) {
-        xs = tpie;
-        ys = tpje;
-        xe = tpis;
-        ye = tpjs;
-    } else {
-        xs = tpis;
-        ys = tpje;
-        xe = tpie;
-        ye = tpjs;
-    }
-
+	//if(IsTMz){
+		if ((IncAngle <= 0.5 * M_PI)) {
+			xs = tpis;
+			ys = tpjs;
+			xe = tpie;
+			ye = tpje;
+		} else if ((IncAngle <= M_PI)) {
+			xs = tpie;
+			ys = tpjs;
+			xe = tpis;
+			ye = tpje;
+		} else if ((IncAngle <= 1.5 * M_PI)) {
+			xs = tpie+1;
+			ys = tpje+1;
+			xe = tpis;
+			ye = tpjs;
+		} else {
+			xs = tpis;
+			ys = tpje;
+			xe = tpie;
+			ye = tpjs;
+		}
+	//}
+	//if(IsTEz){
+	//	if ((IncAngle <= 0.5 * M_PI)) {
+	//		xs = tpis-1;
+	//		ys = tpjs-1;
+	//		xe = tpie;
+	//		ye = tpje;
+	//	} else if ((IncAngle <= M_PI)) {
+	//		xs = tpie+1;
+	//		ys = tpjs-1;
+	//		xe = tpis;
+	//		ye = tpje;
+	//	} else if ((IncAngle <= 1.5 * M_PI)) {
+	//		xs = tpie+1;
+	//		ys = tpje+1;
+	//		xe = tpis;
+	//		ye = tpjs;
+	//	} else {
+	//		xs = tpis-1;
+	//		ys = tpje+1;
+	//		xe = tpie;
+	//		ye = tpjs;
+	//	}
+	//}
     if (IsTEz) {
         int Max_Index_Dez_x;
         int Max_Index_Dez_y;
@@ -125,8 +149,8 @@ void CalculateDelay(MyDataF IncAngle) {
         int Max_Index_Dhx;
         int Max_Index_Dhy;
 
-        Max_Index_Dhx = Max_Index_Dez_x = (int) fabs((double) (xe - xs));
-        Max_Index_Dhy = Max_Index_Dez_y = (int) fabs((double) (ye - ys));
+        Max_Index_Dhx = Max_Index_Dez_x = tpie-tpis;
+        Max_Index_Dhy = Max_Index_Dez_y = tpje-tpjs;
 
         Dhxb = (MyDataF*) malloc((Max_Index_Dhx + 1) * sizeof (MyDataF));
         Dhxt = (MyDataF*) malloc((Max_Index_Dhx + 1) * sizeof (MyDataF));
@@ -152,20 +176,20 @@ void CalculateDelay(MyDataF IncAngle) {
         }
 
         for (i = 0; i <= Max_Index_Dhx; i++) {
-            Dhxb[i] = delays(tpis + i, tpjs - 0.5);
-            Dhxt[i] = delays(tpis + i, tpje + 0.5);
+            Dhxb[i] = delays(tpis + i, tpjs - 0.5)+0.5;
+            Dhxt[i] = delays(tpis + i, tpje + 0.5)+0.5;
         }
         for (i = 0; i <= Max_Index_Dhy; i++) {
-            Dhyl[i] = delays(tpis - 0.5, tpjs + i);
-            Dhyr[i] = delays(tpie + 0.5, tpjs + i);
+            Dhyl[i] = delays(tpis - 0.5, tpjs + i)+0.5;
+            Dhyr[i] = delays(tpie + 0.5, tpjs + i)+0.5;
         }
         for (i = 0; i <= Max_Index_Dez_x; i++) {
-            Dezb[i] = delays(tpis + i, tpjs);
-            Dezt[i] = delays(tpis + i, tpje);
+            Dezb[i] = delays(tpis + i, tpjs)+1;
+            Dezt[i] = delays(tpis + i, tpje)+1;
         }
         for (i = 0; i <= Max_Index_Dez_y; i++) {
-            Dezl[i] = delays(tpis, tpjs + i);
-            Dezr[i] = delays(tpie, tpjs + i);
+            Dezl[i] = delays(tpis, tpjs + i)+1;
+            Dezr[i] = delays(tpie, tpjs + i)+1;
         }
     }
     if (IsTMz) {
@@ -250,8 +274,12 @@ void InitConnectingInterface(MyDataF IncAngle) {
     }
 
     if (IsTEz) {
-        ceihi = dt / eps_0 / dx / vl;
-        chiei = dt / mu_0 / dx / vl;
+		Cezhx = -Ratio_x*dt/eps_0/dx;
+		Cezhy = Ratio_y*dt/eps_0/dy;
+		Chyez = -dt/mu_0/dx;
+		Chxez = dt/mu_0/dy;
+        ceihi = -dt / eps_0 / dx / vl;
+        chiei = -dt / mu_0 / dx / vl;
     }
 
     //Create space for Line EM fields
@@ -316,40 +344,35 @@ void ApplyConnectingE(const MyDataF t) {
     int ind;
     UpdateConnectingE(t);
     if (IsTEz) {
-        /*
-              unsigned int index,ind;
+		int i;
+		for(ind = tpis,i=0;ind<=tpie;ind++,i++){
+			//bottom 
+			d		=	Dhxb[i];
+			di		=	(int)floor(d);
+			df		=	d - di;
+			Ez.data[ind][tpjs]  +=	Cezhx*(Hi[di]+df*(Hi[di+1]-Hi[di]));
 
-              for(ind = tpis;ind<=tpie;ind++){
-                      index = ind*Ez.ny;
-                      //bottom 
-                      d		=	Dhxb[ind+start_index_x]+0.5;
-                      di		=	(int)floor(d);
-                      df		=	d - di;
-                      Ez.data[ind][tpjs]  +=	Cehz.data[ind][tpjs]*Ratio_x*(Hi[di]+df*(Hi[di+1]-Hi[di]))/dy;
+			//top
+			d		=	Dhxt[i];
+			di		=	(int)floor(d);
+			df		=	d - di;
+			Ez.data[ind][tpje] -=	Cezhx*(Hi[di]+df*(Hi[di+1]-Hi[di]));
+		}
+          //bound xn,xp
+          for(ind = tpjs,i=0;ind<=tpje;ind++,i++){
+                  //left side
+                  d		=	Dhyl[i];
+                  di		=	(int)floor(d);
+                  df		=	d - di;
+                  Ez.data[tpis][ind] 	-=	 Cezhy*(Hi[di]+df*(Hi[di+1]-Hi[di]));
 
-                      //top
-                      d		=	Dhxt[ind+start_index_x]+0.5;
-                      di		=	(int)floor(d);
-                      df		=	d - di;
-                      Ez.data[ind][tpje] -=	Cehz.data[ind][tpje]*Ratio_x*(Hi[di]+df*(Hi[di+1]-Hi[di]))/dy;
-              }
-              //bound xn,xp
-              for(ind = tpjs;ind<=tpje;ind++){
-                      //left side
-                      index	=	tpis*Ez.ny+ind;
-                      d		=	Dhyl[ind+start_index_y]+0.5;
-                      di		=	(int)floor(d);
-                      df		=	d - di;
-                      Ez.data[tpis][ind] 	-=	 Cehz.data[tpis][ind]*(-Ratio_y)*(Hi[di]+df*(Hi[di+1]-Hi[di]))/dx;
+                  //right side
+                  d		=	Dhyr[i];
+                  di		=	(int)floor(d);
+                  df		=	d - di;
+                  Ez.data[tpie][ind]	+=	Cezhy*(Hi[di]+df*(Hi[di+1]-Hi[di]));
+          }
 
-                      //right side
-                      index	=	tpie*Ez.ny+ind;
-                      d		=	Dhyr[ind+start_index_y]+0.5;
-                      di		=	(int)floor(d);
-                      df		=	d - di;
-                      Ez.data[tpie][ind]	+=	Cehz.data[tpie][ind]*(-Ratio_y)*(Hi[di]+df*(Hi[di+1]-Hi[di]))/dx;
-              }
-         */
     }
     if (IsTMz) {
         unsigned int i, j;
@@ -387,35 +410,31 @@ void ApplyConnectingM(const MyDataF t) {
     int di;
     MyDataF df;
     UpdateConnectingM(t);
-    if (IsTEz) {
-        /*
-                  for(ind=tpjs;ind<=tpje;ind++){
-                          //left side
-                          di = (int)floor(Dezl[ind+start_index_y]);
-                          df = Dezl[ind+start_index_y] - di;
-                          di = di+1;
-                          Hy.data[(tpis-1)][ind]	-=	Chyez*(Ei[di]+df*(Ei[di+1]-Ei[di]));//0;//
-                          //right side
-                          di = (int)floor(Dezr[ind+start_index_y]);
-                          df = Dezr[ind+start_index_y] - di;
-                          di = di+1;
-                          Hy.data[tpie][ind]		+=	Chyez*(Ei[di]+df*(Ei[di+1]-Ei[di]));
-                  }
-                  //Adjust Hy
-                  for(ind=tpis;ind<=tpie;ind++){
-                          // bottom
-                          di = (int)floor(Dezb[ind+start_index_x]);
-                          df = Dezb[ind+start_index_x] - di;
-                          di = di+1;
-
-              Hx.data[ind][tpjs-1]		-=		Chxez*(Ei[di]+df*(Ei[di+1]-Ei[di]));
-                          //yp
-                          di = (int)floor(Dezt[ind+start_index_x]);
-                          df = Dezt[ind+start_index_x] - di;
-                          di = di+1;
-              Hx.data[ind][tpje]		+=	Chxez*(Ei[di]+df*(Ei[di+1]-Ei[di]));
-                  }
-         */
+    if (IsTEz) {      
+		unsigned lowIndex;
+		lowIndex = tpis-1;
+          for(ind=tpjs,ind1=0;ind<=tpje;ind++,ind1++){
+                  //left side
+                  di = (int)floor(Dezl[ind1]);
+                  df = Dezl[ind1] - di;
+                  Hy.data[lowIndex][ind]	-=	Chyez*(Ei[di]+df*(Ei[di+1]-Ei[di]));//0;//
+                  //right side
+                  di = (int)floor(Dezr[ind1]);
+                  df = Dezr[ind1] - di;
+                  Hy.data[tpie][ind]		+=	Chyez*(Ei[di]+df*(Ei[di+1]-Ei[di]));
+          }
+          //Adjust Hx
+		  lowIndex = tpjs -1 ;
+          for(ind=tpis,ind1=0;ind<=tpie;ind++,ind1++){
+				// yn
+				di = (int)floor(Dezb[ind1]);
+				df = Dezb[ind1] - di;
+				Hx.data[ind][lowIndex]	-=	Chxez*(Ei[di]+df*(Ei[di+1]-Ei[di]));
+				//yp
+				di = (int)floor(Dezt[ind1]);
+				df = Dezt[ind1] - di;
+				Hx.data[ind][tpje]		+=	Chxez*(Ei[di]+df*(Ei[di+1]-Ei[di]));
+		  }
     }
     if (IsTMz) {
         unsigned int mtpis = tpis - 1;

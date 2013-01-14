@@ -36,7 +36,7 @@ void InitStoreIndex() {
             Deff_Store_Index_y[c] = (cy-1.5)*lamda/ds_F+midj;
             cout<<c<<'\t'<<Deff_Store_Index_x[c]<<'\t'<<Deff_Store_Index_y[c]<<endl;
 
-            //计算保存区域下标的范围
+            //index range for computation area
             if(minSI>Deff_Store_Index_x[c])minSI=Deff_Store_Index_x[c];
             if(minSJ>Deff_Store_Index_y[c])minSJ=Deff_Store_Index_y[c];
             if(maxSI<Deff_Store_Index_x[c])maxSI=Deff_Store_Index_x[c];
@@ -55,12 +55,12 @@ void InitStoreIndex() {
 }
 void OpenFiles()
 {
-    denfile.open("resdata/den.dat");
+    denfile.open("resdata/den.txt");
     if (!denfile.is_open()) {
         cerr << "open denfile failed!" << endl;
         exit(-1);
     } else cout<<"denfile is opened"<<endl;
-    deff_file.open("resdata/deff.dat");
+    deff_file.open("resdata/deff.txt");
     if (!deff_file.is_open()) {
         cerr << "open denfile failed!" << endl;
         exit(-1);
@@ -141,11 +141,22 @@ void InitFDTDProblem(const string &fname) {
             cout << setw(width) << "Density Formula:" << denFormula << endl;
             infile >> ifWithDensity;
             cout << setw(width) << "if with Density:"<<ifWithDensity <<endl;
+            infile >> IsTEz;
+	    if(IsTEz<0)IsTEz = 1;
+	    if(IsTEz)IsTMz=0;
+	    else IsTMz=1;
+            cout << setw(width) << "if is TEz wave:"<<IsTEz<<endl;
             infile.close();
         } catch (exception &e) {
             cerr << e.what() << endl;
             exit(-1);
         }
+        //wave type
+	//if (IsTMz==0 && IsTEz==0){
+	//        IsTMz = _SOURCE_TMZ_;
+        //	IsTEz = _SOURCE_TEZ_;
+	//}
+
         if (f < 10)
             //initial wave parameters
             f = FREQUENCY;
@@ -176,10 +187,6 @@ void InitFDTDProblem(const string &fname) {
             Hy0 = Ratio_y*H0;
             Ez0 = E0;
         }
-
-        //wave type
-        IsTMz = _SOURCE_TMX_;
-        IsTEz = _SOURCE_TEX_;
 
         //number of wavelength in domain
         if (NumOfWaveLength > 1000)
@@ -231,11 +238,11 @@ void InitFDTDProblem(const string &fname) {
         k = omega / c;
 
         //wave incident angle
-        phi = INC_ANGLE * M_PI;
+        phi = INC_ANGLE ;
 
         //wave type
-        IsTMz = _SOURCE_TMX_;
-        IsTEz = _SOURCE_TEX_;
+        IsTMz = _SOURCE_TMZ_;
+        IsTEz = _SOURCE_TEZ_;
 
         //number of wavelength in domain
         NumOfWaveLength = NUMBER_OF_WAVELENGTHS_IN_DOMAIN;
@@ -281,7 +288,7 @@ void InitFDTDProblem(const string &fname) {
         CStep = 100;
 
         //Density Formula
-        denFormula = 0;
+        denFormula = 4;
     }
 }
 
@@ -319,16 +326,164 @@ void InitEleDen() {
     cout<<"max density position:("<<mi<<','<<mj<<')'<<endl;
 }
 
+void InitCee(){
+	if (ifWithDensity)
+	{
+	
+	unsigned int i,j,im,jm;	
+	if(IsTMz){		
+		for(i=0,im=m/2;i<Ceex.nx;++i,im+=m)
+			for(j=0,jm=0;j<Ceex.ny;j++,jm+=m){
+				Ceex.data[i][j]=-beta.data[im][jm]/(1+beta.data[im][jm])+1/(1+beta.data[im][jm]);
+			}
+			for(i=0,im=0;i<Ceey.ny;++i,im+=m)
+				for(j=0,jm=m2;j<Ceey.ny;j++,jm+=m){
+					Ceey.data[i][j]=-beta.data[im][jm]/(1+beta.data[im][jm])+1/(1+beta.data[im][jm]);
+				}
+	}
+	if(IsTEz){
+		for(i=0,im=0;i<Ceez.nx;++i,im+=m)
+			for(j=0,jm=0;j<Ceez.ny;j++,jm+=m){
+				Ceez.data[i][j]=-beta.data[im][jm]/(1+beta.data[im][jm])+1/(1+beta.data[im][jm]);
+			}
+	}
+	//PrintData(Ceez);
+	}else{
+		if (IsTEz)
+		{
+			Ceez.InitStructData(0.0);
+		}
+		if (IsTMz)
+		{
+			Ceey.InitStructData(0.0);
+			Ceez.InitStructData(0.0);
+		}
+	}
+}
+void InitCeh(){
+	if (ifWithDensity)
+	{
+	
+	unsigned int i,j;
+	unsigned int im,jm;
+	//MyDataF temp=dt/eps_0;
+	if(IsTMz){		
+		for(i=0,im=m2;i<Cehx.nx;++i,im+=m)
+			for(j=0,jm=0;j<Cehx.ny;j++,jm+=m){
+				Cehx.data[i][j]=1/(eps_0/dt+eps_0*beta.data[im][jm]/dt);
+			}
+			for(i=0,im=0;i<Cehy.ny;++i,im+=m)
+				for(j=0,jm=m2;j<Cehy.ny;j++,jm+=m){
+					Cehy.data[i][j]=1/(eps_0/dt+eps_0*beta.data[im][jm]/dt);
+				}
+	}
+	if(IsTEz){
+		for(i=0,im=0;i<Cehz.nx;++i,im+=m)
+			for(j=0,jm=0;j<Cehz.ny;j++,jm+=m){
+				Cehz.data[i][j]=1/(eps_0/dt+eps_0*beta.data[im][jm]/dt);
+			}
+	}
+	//PrintData(Cehz);
+	}else{
+		if (IsTEz)
+		{
+			Cehz.InitStructData(0.0);
+		}
+		if (IsTMz)
+		{
+			Cehx.InitStructData(0.0);
+			Cehy.InitStructData(0.0);
+		}
+	}
+}
+void InitCev(MyDataF alpha_ev){
+	if (ifWithDensity)
+	{
+	
+	unsigned int i,j;
+	MyDataF temp;
+	unsigned int im,jm;
+
+	temp = 0.5*e*dt*(1+alpha_ev)/eps_0;
+	if(IsTMz){		
+		for(i=0,im=m2;i<Cevx.nx;++i,im+=m)
+			for(j=0,jm=0;j<Cevx.ny;j++,jm+=m){
+				Cevx.data[i][j]=temp*Ne.data[im][jm]/(1+beta.data[im][jm]);
+			}
+			for(i=0,im=0;i<Cevy.ny;++i,im+=m)
+				for(j=0,jm=m2;j<Cevy.ny;j++,jm+=m){
+					Cevy.data[i][j]=temp*Ne.data[im][jm]/(1+beta.data[im][jm]);
+				}
+	}
+	if(IsTEz){
+		for(im=0,i=0;i<Cevz.nx;++i,im+=m)
+			for(j=0,jm=0;j<Cevz.ny;j++,jm+=m){
+				Cevz.data[i][j]=temp*Ne.data[im][jm]/(1+beta.data[im][jm]);
+			}
+			//PrintData(Cevz);
+	}
+	}else{
+		if (IsTEz)
+		{
+			Cevz.InitStructData(0.0);
+		}
+		if (IsTMz)
+		{
+			Cevy.InitStructData(0.0);
+			Cevy.InitStructData(0.0);
+		}
+	}
+}
+void InitBeta(MyDataF gamma){
+	if(ifWithDensity){
+		unsigned int i,j;
+		MyDataF temp=0.25*e*e*dt*dt/me/eps_0/gamma;
+		for(i=0;i<beta.nx;i++)
+			for(j=0;j<beta.ny;j++)
+				beta.data[i][j]=temp*Ne.data[i][j];
+	}		
+}
+void InitCoeffForVec(){
+
+	MyDataF gamma,a=0;
+	a	  = 0.5*dt*vm;
+	gamma = 1+a;
+	alpha = (1-a)/(1+a);
+	Cve   = e*dt*0.5/(me*gamma);
+
+	InitBeta(gamma);
+	/*PrintData(beta);*/
+	InitCee();
+	InitCeh();
+	InitCev(alpha);
+
+}
 void InitCoeff() {
 
-    cexux = -dt * e / eps_0;
-    cexhz = dt / dy / eps_0;
+	if(IsTMz){
+		cexux = -dt * e / eps_0;
+		cexhz = dt / dy / eps_0;
 
-    ceyhz = -dt / eps_0 / dx;
-    ceyuy = -e * dt / eps_0;
+		ceyhz = -dt / eps_0 / dx;
+		ceyuy = -e * dt / eps_0;
 
-    chzex = dt / mu_0 / dy;
-    chzey = -dt / mu_0 / dx;
+		chzex = dt / mu_0 / dy;
+		chzey = -dt / mu_0 / dx;
+	}
+	if(IsTEz){
+		
+		chxez = -dt/mu_0/dy;
+		chyez = dt/mu_0/dx;
+
+		cezuz = -dt*e/eps_0;
+		cezhx = -dt/dy/eps_0;
+		cezhy = dt/dx/eps_0;
+
+	}
+	if (denFormula==4)
+	{
+		InitCoeffForVec();
+	}
 }
 
 void CreateFields() {
@@ -355,17 +510,17 @@ void CreateFields() {
         Uy.SetName(path + "uy");
     }
     if (IsTEz) {
-        Ex.CreateStruct(nxp1, ny);
-        Ey.CreateStruct(nx, nyp1);
-        Pex.CreateStruct(nxp1, ny);
-        //Pey.CreateStruct(nx,nyp1);
-        Hz.CreateStruct(nxp1, nyp1);
+        Hx.CreateStruct(nxp1, ny);
+        Hy.CreateStruct(nx, nyp1);
+        Ez.CreateStruct(nxp1, nyp1);
+		Pez.CreateStruct(Ez);
+		Uz.CreateStruct(Ez,0.0);
 
-        Ex.SetName(path + "hx");
-        Ey.SetName(path + "hy");
-        Pex.SetName(path + "pez");
-        //Pey.CreateStruct(nx,nyp1);
-        Hz.SetName(path + "ez");
+        Hx.SetName(path + "hx");
+        Hy.SetName(path + "hy");
+        Pez.SetName(path + "pez");
+        Ez.SetName(path + "ez");
+		Uz.SetName(path + "uz");
     }
     if(ifWithDensity) {
         Ne.CreateStruct(nxp1*m, nyp1 * m);
