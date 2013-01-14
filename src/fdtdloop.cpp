@@ -50,17 +50,17 @@ void fdtdloop() {
 
         sxpos = (int) (0.5 + nx / 2 + 0.125 * lamda / dx); //tpis+3;//tpis-SCATTER_FIELD_DOMAIN_BND_SIZE/2;//x position of sources
         sypos = (int) (0.5 + (tpjs + tpje) / 2); //(ny/2); //y position of sources
-    */
+     */
     MultiSize = (int) (0.5 + dt_F / dt);
 
-    cout<<endl;
-    cout<<setw(20)<<"m:"<<m<<endl;
-    cout<<setw(20)<<"MultiSize:"<< MultiSize<<endl;
-    cout<<setw(20)<<"Total time steps:"<<TotalTimeStep<<endl;
-    cout<<setw(20)<<"Density Time Steps:"<<Density_Time_Step * m<<endl;
-    cout<<setw(20)<<"Step per half ns:"<< step_per_half_ns8<<endl;
-    cout<<endl;
-    cout<<"============================================================="<<endl;
+    cout << endl;
+    cout << setw(20) << "m:" << m << endl;
+    cout << setw(20) << "MultiSize:" << MultiSize << endl;
+    cout << setw(20) << "Total time steps:" << TotalTimeStep << endl;
+    cout << setw(20) << "Density Time Steps:" << Density_Time_Step * m << endl;
+    cout << setw(20) << "Step per half ns:" << step_per_half_ns8 << endl;
+    cout << endl;
+    cout << "=============================================================" << endl;
     //system("pause");
 
     CurTime = -half_dt;
@@ -68,58 +68,56 @@ void fdtdloop() {
     InitMatlabEngine();
     InitConnectingInterface(phi);
     t_start = clock();
-    for(CurTimeStep=1; CurTimeStep<=Density_Time_Step&&TotalTimeStep>=Step; CurTimeStep++)
-    {
-        for(cdtF = 0,MTimeStep = 1; MTimeStep<=MultiSize&&cdtF < dt_F&&TotalTimeStep>=Step; cdtF=cdtF+dt,MTimeStep++,Step++)
-        {
+    for (CurTimeStep = 1; CurTimeStep <= Density_Time_Step && TotalTimeStep >= Step; CurTimeStep++) {
+        for (cdtF = 0, MTimeStep = 1; MTimeStep <= MultiSize && cdtF < dt_F && TotalTimeStep >= Step; cdtF = cdtF + dt, MTimeStep++, Step++) {
             //MyDataF ezl,ezlr;
             CurTime += half_dt;
-			//
-			//Ez.data[tpie-2][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
-			//Ez.data[tpie-1][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
-			//Ez.data[tpie-2][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
-			//Ez.data[tpie-1][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
+            //
+            //Ez.data[tpie-2][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
+            //Ez.data[tpie-1][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
+            //Ez.data[tpie-2][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
+            //Ez.data[tpie-1][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
 
-			//Ez.data[Ez.nx/4*3][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
-			//Ez.data[Ez.nx/4*3+1][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
-			//Ez.data[Ez.nx/4*3][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
-			//Ez.data[Ez.nx/4*3+1][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
+            //Ez.data[Ez.nx/4*3][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
+            //Ez.data[Ez.nx/4*3+1][Ez.ny/4*3]=E_0*sin(2*M_PI*omega*CurTime);
+            //Ez.data[Ez.nx/4*3][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
+            //Ez.data[Ez.nx/4*3+1][Ez.ny/4*3+1]=E_0*sin(2*M_PI*omega*CurTime);
             //E Field
             UpdateMField();
-                //MatlabSimulation();
+            //MatlabSimulation();
             //Hz.PlotArrays(ep);
             ApplyConnectingM(CurTime);
-                //MatlabSimulation();
-			UpdateMFieldForPML(Hx,Hy,Hz,Ex,Ey,Ez);
-                MatlabSimulation();
+            //MatlabSimulation();
+            UpdateMFieldForPML(Hx, Hy, Hz, Ex, Ey, Ez);
+            MatlabSimulation();
             //UpdMagFldForPML_TMz(Hz, Ex, Ey);
             //U Field
-            if(ifWithDensity)UpdateUField();
+            if (ifWithDensity)UpdateUField();
             //Erms
             CurTime += half_dt;
             UpdateEField();
-                 //MatlabSimulation();
-           ApplyConnectingE(CurTime);
-                 //MatlabSimulation();
-			UpdateEFieldForPML(Ex,Ey,Ez,Hx,Hy,Hz);
+            //MatlabSimulation();
+            ApplyConnectingE(CurTime);
+            //MatlabSimulation();
+            UpdateEFieldForPML(Ex, Ey, Ez, Hx, Hy, Hz);
             //UpdEltFldForPML_TMz(Ex, Ey, Hz);
 
-            if(ifWithDensity) {
-                if(denFormula==4)CalEmax();
+            if (ifWithDensity) {
+                if (denFormula == 4)CalEmax();
                 else UpdateUeField();
             }
 
             //if (Step % PlotStep == 0)
-                MatlabSimulation();
+            MatlabSimulation();
             if (Step % CStep == 0)
                 CapFields(Step / CStep);
         }
-        if(ifWithDensity){
-			InterpEmax();
-			Pem=Em;
-			Em.CaptData(CStep);
-		}
-        if(ifWithDensity) UpdateDensity();
+        if (ifWithDensity) {
+            InterpEmax();
+            Pem = Em;
+            Em.CaptData(CStep);
+        }
+        if (ifWithDensity) UpdateDensity();
         MatlabSimulation();
 
         cout << Step << '\t' << CurTime / 1e-9 << endl;
@@ -128,8 +126,8 @@ void fdtdloop() {
 
     EndSimulation();
     t_end = clock();
-    cout<<"========================================"<<endl;
-    cout<<"Total time used : "<< t_end - t_start<<endl;
+    cout << "========================================" << endl;
+    cout << "Total time used : " << t_end - t_start << endl;
     //system("pause");
 
 }//END OF FDTDLOOP

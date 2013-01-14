@@ -35,6 +35,6 @@ inline MyDataF ElectricEnergy(unsigned im, unsigned jm) {
 
 void CalEmax();
 void InterpEmax();
-MyDataF getEmDivN(int i, int j) ;
+MyDataF getEmDivN(int i, int j);
 
 #endif

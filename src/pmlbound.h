@@ -10,7 +10,7 @@
  * @param ncx
  * @param ncy
  */
-void InitialPML(unsigned ncpml,unsigned ncx,unsigned ncy);
+void InitialPML(unsigned ncpml, unsigned ncx, unsigned ncy);
 
 /**
  * UpdMagFldForPML_TEz

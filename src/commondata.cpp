@@ -28,11 +28,11 @@ MyStruct ppne;
 MyStruct beta;
 
 MyStruct Pez; //Ez at previous step
-MyStruct Ceex,Ceey,Ceez;
-MyStruct Cevx,Cevy,Cevz;
-MyStruct Cehx,Cehy,Cehz;
+MyStruct Ceex, Ceey, Ceez;
+MyStruct Cevx, Cevy, Cevz;
+MyStruct Cehx, Cehy, Cehz;
 //MyDataF Chxez,Chyez,Chzey,Chzex;
-MyStruct Hx,Hy,Ez,Vex,Vez,Vey,Uz;
+MyStruct Hx, Hy, Ez, Vex, Vez, Vey, Uz;
 
 MyStruct Deff, Niu_i, Niu_a;
 int denFormula;
@@ -64,18 +64,18 @@ const string EmDivNTxt("boltzmann/EmDivN.txt");
 const string EnergyTxt("boltzmann/m_energy.txt");
 const string vcTxt("boltzmann/vcDivN.txt");
 const string viTxt("boltzmann/viDivN.txt");
-FileInterp VcDivN(ArrayCount,EmDivNTxt,vcTxt);
-FileInterp ViDivN(ArrayCount,EmDivNTxt,viTxt);
-FileInterp EnergyDivN(ArrayCount,EmDivNTxt,EnergyTxt);
+FileInterp VcDivN(ArrayCount, EmDivNTxt, vcTxt);
+FileInterp ViDivN(ArrayCount, EmDivNTxt, viTxt);
+FileInterp EnergyDivN(ArrayCount, EmDivNTxt, EnergyTxt);
 MyStruct Em;
 MyStruct Pem;
 
-MyDataF chxez,chyez,Cve,alpha;
+MyDataF chxez, chyez, Cve, alpha;
 //update coefficients
 MyDataF chzex, chzey; //coefficients updating Hz
 MyDataF cexhz, cexux; //coefficients updating Ex
 MyDataF ceyhz, ceyuy; //coefficients updating Ey
-MyDataF cezhx,cezhy, cezuz; //coefficients updating Ez
+MyDataF cezhx, cezhy, cezuz; //coefficients updating Ez
 
 MyDataF De;
 MyDataF Da;
@@ -101,7 +101,7 @@ MyDataF DtfDivDsfs; //dt_F/ds_F/ds_F
 MyDataF eps_m_e_miu; //eps_0 / (e * (mu_e + mu_i))
 MyDataF dt2; //dt*2
 MyDataF ds_Pow_2; //ds_F*ds_F
-MyDataF MueDivMui=DEFAULT_MIU_DIV;
+MyDataF MueDivMui = DEFAULT_MIU_DIV;
 
 unsigned m, m2;
 
@@ -145,6 +145,6 @@ unsigned Deff_Store_Index_x[10], Deff_Store_Index_y[10];
 unsigned minSI, minSJ, maxSI, maxSJ;
 unsigned midi, midj, pci;
 
-int ifWithDensity = IF_WITH_DENSITY;// if with density or not
+int ifWithDensity = IF_WITH_DENSITY; // if with density or not
 
 #endif

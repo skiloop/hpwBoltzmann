@@ -1,8 +1,7 @@
 
 #pragma once
 
-
-class Interpolation //七次拉格朗日插值
+class Interpolation //
 {
 public:
     static double lgr(double const *lgrx, double const *lgry, int lgrn, double lgrt);
