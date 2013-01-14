@@ -231,7 +231,7 @@ void InitFDTDProblem(const string &fname) {
         k = omega / c;
 
         //wave incident angle
-        phi = INC_ANGLE * M_PI;
+        phi = INC_ANGLE ;
 
         //wave type
         IsTMz = _SOURCE_TMZ_;

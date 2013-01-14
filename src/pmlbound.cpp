@@ -980,10 +980,9 @@ void InitPMLCoefficients() {
 
 			
 			}
-				Chzyh_xp.InitStructData(1.0);		
-				Chzyex_xp.InitStructData(dt/(dy*mu_0));	
-
-			
+		Chzyh_xp.InitStructData(1.0);		
+		Chzyex_xp.InitStructData(dt/(dy*mu_0));	
+	
 		free(rho_e);
 		free(rho_m);
 		
@@ -1114,12 +1113,13 @@ void UpdEltFldForPML_TEz(MyStruct &ez, const MyStruct &hx, const MyStruct &hy) {
         }
         for (j = 0, jm = pjs; j < Ezy_xn.ny; j++, jm++) {
             km = jm + 1;
-            for (i = 0, im = i + 1; i < Ezy_xn.nx; ++i, im++)
+			for (i = 0, im = i + 1; i < Ezy_xn.nx; ++i, im++){
                 Ezy_xn.data[i][j] = Cezye_xn.data[i][j] * Ezy_xn.data[i][j]
                     + Cezyhx_xn.data[i][j]*(hx.data[im][km] - hx.data[im][jm]);
+			}
         }
     }
-    /*============================================================================================================*/
+    
     if (IsPMLxp) {
         for (i = 0, im = pie; i < Ezx_xp.nx; ++i, im++) {
             km = im - 1;
@@ -1130,12 +1130,13 @@ void UpdEltFldForPML_TEz(MyStruct &ez, const MyStruct &hx, const MyStruct &hy) {
         }
         for (j = 0, jm = pjs; j < Ezy_xp.ny; j++, jm++) {
             km = jm + 1;
-            for (i = 0, im = pie; i < Ezy_xp.nx; ++i, im++)
+			for (i = 0, im = pie; i < Ezy_xp.nx; ++i, im++){
                 Ezy_xp.data[i][j] = Cezye_xp.data[i][j] * Ezy_xp.data[i][j]
                     + Cezyhx_xp.data[i][j]*(hx.data[im][km] - hx.data[im][jm]);
+			}
         }
     }
-    /*===============================================================================================================*/
+   
     if (IsPMLyn) {
         for (i = 0, im = pis; i < Ezx_yn.nx; ++i, im++) {
             km = im + 1;
@@ -1148,95 +1149,92 @@ void UpdEltFldForPML_TEz(MyStruct &ez, const MyStruct &hx, const MyStruct &hy) {
             for (j = 0; j < Ezy_yn.ny; j++) {
                 Ezy_yn.data[i][j] = Cezye_yn.data[i][j] * Ezy_yn.data[i][j]
                         + Cezyhx_yn.data[i][j]*(hx.data[im][j + 1] - hx.data[im][j]);
-                /*******************************************************************************************************************/
+                
             }
 
     }
-    /*===============================================================================================================*/
     if (IsPMLyp) {
         for (i = 0, im = pis; i < Ezx_yp.nx; ++i, im++) {
             km = im + 1;
             for (j = 0, jm = pje; j < Ezx_yp.ny; j++, jm++) {
                 Ezx_yp.data[i][j] = Cezxe_yp.data[i][j] * Ezx_yp.data[i][j]
                         + Cezxhy_yp.data[i][j]*(hy.data[km][jm] - hy.data[im][jm]);
-                /*******************************************************************************************************************/
             }
         }
         for (j = 0, jm = pje; j < Ezy_yp.ny; j++, jm++) {
             km = jm - 1;
-            for (i = 0, im = i + 1; i < Ezy_yp.nx; ++i, im++)
+			for (i = 0, im = i + 1; i < Ezy_yp.nx; ++i, im++){
                 Ezy_yp.data[i][j] = Cezye_yp.data[i][j] * Ezy_yp.data[i][j]
                     + Cezyhx_yp.data[i][j]*(hx.data[im][jm] - hx.data[im][km]);
-            /*******************************************************************************************************************/
+			}
+            
         }
     }
-    /*===================================================================================================================*/
+    // 1
     for (i = 0; i < pis; i++) {
         km = i + 1;
         for (j = 0; j < pjs; j++) {
-            ez.data[km][j + 1] = Ezx_xn.data[i][j] + Ezy_yn.data[i][j];
-            /*******************************************************************************************************************/
+            ez.data[km][j + 1] = Ezx_xn.data[i][j] + Ezy_yn.data[i][j];           
         }
     }
+	// 2
     for (i = 0; i < pis; i++) {
         km = i + 1;
         for (j = 0, jm = pje; j < PMLCellyp; j++, jm++) {
             ez.data[km][jm] = Ezx_xn.data[i][jm - 1] + Ezy_yp.data[i][j];
-            /*******************************************************************************************************************/
         }
     }
+	// 3
     for (i = pie; i < nx; i++) {
         im = i - pie;
         km = i - 1;
         for (j = pje; j < ny; j++) {
             ez.data[i][j] = Ezx_xp.data[im][j - 1] + Ezy_yp.data[km][j - pje];
-            /*******************************************************************************************************************/
         }
     }
+	// 4
     for (i = pie; i < nx; i++) {
         im = i - pie;
         km = i - 1;
         for (j = 0; j < pjs; j++) {
             ez.data[i][j + 1] = Ezx_xp.data[im][j] + Ezy_yn.data[km][j];
-            /*******************************************************************************************************************/
         }
     }
+	// 5
     jm = pie - 1;
     for (i = pis; i < jm; i++) {
         im = i + 1;
         km = i - pis;
         for (j = 0; j < pjs; j++) {
             ez.data[im][j + 1] = Ezx_yn.data[km][j] + Ezy_yn.data[i][j];
-            /*******************************************************************************************************************/
         }
     }
+	// 6
     jm = pie - 1;
     for (i = pis; i < jm; i++) {
         im = i + 1;
         km = i - pis;
         for (j = 0; j < PMLCellyp; j++) {
             ez.data[im][j + pje] = Ezx_yp.data[km][j] + Ezy_yp.data[i][j];
-            /*******************************************************************************************************************/
         }
     }
-    /*=======================================================================================================*/
+	// 7
     im = pje - 1;
     for (j = pjs; j < im; j++) {
-        jm = j + 1;
+        jm = j+1;
         km = j - pjs;
         for (i = 0; i < pis; i++) {
-            ez.data[i + 1][jm] = Ezx_xn.data[i][j] + Ezy_xn.data[i][km];
-            /*******************************************************************************************************************/
+            ez.data[i+1][jm] = Ezx_xn.data[i][j] + Ezy_xn.data[i][km];
         }
     }
+	// 8
     for (j = pjs; j < pje - 1; j++) {
         jm = j + 1;
         km = j - pjs;
         for (i = 0; i < PMLCellxp; i++) {
-            ez.data[i + 1][jm] = Ezx_xp.data[i][j] + Ezy_xp.data[i][km];
+            ez.data[i + pie][jm] = Ezx_xp.data[i][j] + Ezy_xp.data[i][km];
         }
     }
-
 }
 
 void UpdEltFldForPML_TMz(MyStruct &ex, MyStruct &ey, const MyStruct &hz) {
@@ -1345,10 +1343,8 @@ void UpdMagFldForPML_TMz(MyStruct &hz, const MyStruct &ex, const MyStruct &ey) {
             for (j = 0, jm = pjs; j < Hzy_xn.ny; j++, jm++) {
                 Hzy_xn.data[i][j] = Chzyh_xn.data[i][j] * Hzy_xn.data[i][j]
                         + Chzyex_xn.data[i][j]*(ex.data[i][jm + 1] - ex.data[i][jm]);
-
             }
     }
-    /*============================================================================================================*/
     if (IsPMLxp) {
         for (i = 0, im = pie; i < Hzx_xp.nx; ++i, im++) {
             km = im + 1;
@@ -1456,4 +1452,5 @@ void UpdMagFldForPML_TMz(MyStruct &hz, const MyStruct &ex, const MyStruct &ey) {
         }
     }
 }
+
 

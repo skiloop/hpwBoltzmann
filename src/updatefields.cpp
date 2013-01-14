@@ -181,6 +181,7 @@ void UpdateEField() {
     }
 	if(IsTEz){
 		Pez = Ez;
+		//unsigned bk=0;
 		for (i = pis; i < pie; i++) {
             for (j = pjs; j < pje; j++) {
                 Ez.data[i][j] += cezhy * (Hy.data[i][j] - Hy.data[i - 1][j])
@@ -247,7 +248,7 @@ void UpdateUField1210() {
 	    
             //tvc = Ne.data[im][jm] * vc.Interp(em);
             alpha = (2.0 - tvc) / (2.0 + tvc);
-            beta = dt_me_e_2 / (2.0 + tvc);
+            beta  = dt_me_e_2 / (2.0 + tvc);
             Uy.data[i][j] = alpha * Uy.data[i][j] + beta * Ne.data[im][jm] * Ey.data[i][j];
         }
     }
