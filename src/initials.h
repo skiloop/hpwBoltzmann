@@ -9,6 +9,6 @@
  * @brief Initial all global data in @file dommondata.cpp .
  * @param file name for parameters
  */
-void Initial(const std::string&fname = "");
+void Initial(const std::string&fname="");
 
 #endif

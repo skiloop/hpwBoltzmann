@@ -22,7 +22,8 @@ FileInterp::FileInterp(int nv, const string &filex, const string &filey)
     ifstream infx, infy;
 
     //open file for array x
-    try {
+    try
+    {
         infx.open(filex.c_str());
         if (!infx.is_open()) {
             cerr << "Cannot open file:" << filex << endl;
@@ -31,12 +32,15 @@ FileInterp::FileInterp(int nv, const string &filex, const string &filey)
 #ifdef _DEBUG
         cout << "open file :" << filex << endl;
 #endif
-    } catch (exception & e) {
+    }
+
+    catch(exception & e) {
         cerr << e.what() << endl;
         exit(-1);
     }
     //open file for array y
-    try {
+    try
+    {
         infy.open(filey.c_str());
         if (!infy.is_open()) {
             cerr << "Cannot open file:" << filey << endl;
@@ -45,7 +49,8 @@ FileInterp::FileInterp(int nv, const string &filex, const string &filey)
 #ifdef _DEBUG
         cout << "open file" << filey << endl;
 #endif
-    }    catch (exception & e) {
+    }
+    catch(exception & e) {
         cerr << e.what() << endl;
         exit(-1);
     }
@@ -55,10 +60,13 @@ FileInterp::FileInterp(int nv, const string &filex, const string &filey)
         cerr << "Invalid n for FileInterp" << endl;
         exit(-1);
     }
-    try {
+    try
+    {
         x = new double[n];
         y = new double[n];
-    } catch (exception & e) {
+    }
+
+    catch(exception & e) {
         cerr << e.what() << endl;
         if (x != NULL)delete[]x;
         if (y != NULL)delete[]y;
@@ -66,7 +74,8 @@ FileInterp::FileInterp(int nv, const string &filex, const string &filey)
     }
 
     //read files
-    try {
+    try
+    {
         int i = 0;
         while (i < n && infx.good() && infy.good()) {
             infx >> x[i];
@@ -74,7 +83,9 @@ FileInterp::FileInterp(int nv, const string &filex, const string &filey)
             i++;
         }
         n = i;
-    } catch (exception & e) {
+    }
+
+    catch(exception & e) {
         cerr << e.what() << endl;
         exit(-1);
     }
@@ -91,10 +102,13 @@ FileInterp::FileInterp(const FileInterp& orig) {
         cerr << "Invalid n for FileInterp" << endl;
         exit(-1);
     }
-    try {
+    try
+    {
         x = new double[n];
         y = new double[n];
-    } catch (exception & e) {
+    }
+
+    catch(exception & e) {
         cerr << e.what() << endl;
         if (x != NULL)delete[]x;
         if (y != NULL)delete[]y;

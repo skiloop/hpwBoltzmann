@@ -12,12 +12,12 @@ using namespace std;
 
 int main(int argc, char **argv) {
     //system("dir");
-    if (argc <= 1)
+    if(argc<=1)
         Initial();
     else
         Initial(argv[1]);
     //system("pause");
-    InitialPML(nbound, nx, ny);
+    InitialPML(nbound,nx,ny);
     InitConnectingInterface(phi);
     //CalculateDelay(phi);
     fdtdloop();

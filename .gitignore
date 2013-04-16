@@ -23,5 +23,12 @@ resdata/*
 # object excuted file
 hpw
 
+# compress file
+*.gz
+*.bz2
+*.zip
+*.rar
+*.7z
+
 
 

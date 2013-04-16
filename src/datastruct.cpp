@@ -71,11 +71,14 @@ MyStruct::MyStruct(unsigned cx, unsigned cy)
 
 MyStruct::MyStruct(const MyStruct& obj) : data(NULL) {
     CreateStruct(obj);
-    try {
+    try
+    {
         for (unsigned i = 0; i < obj.nx; i++) {
             memcpy(data[i], obj.data[i], obj.ny * sizeof (MyDataF));
         }
-    } catch (exception & e) {
+    }
+
+    catch(exception & e) {
         cerr << e.what() << endl;
         exit(-1);
     }
@@ -138,11 +141,11 @@ int MyStruct::ResetStructData(MyDataF Val) {
     unsigned i, j;
     if (!CheckStruct())
         return -1;
-    for (i = 0; i < nx; i++) {
-        for (j = 0; j < ny; j++) {
+	for (i = 0; i < nx; i++){
+		for (j = 0; j < ny; j++){
             data[i][j] = Val;
-        }
-    }
+		}
+	}
     return 0;
 }
 
@@ -188,7 +191,7 @@ bool MyStruct::CheckStruct() {
     return true;
 }
 
-void MyStruct::CaptData(const unsigned num, unsigned p) {
+void MyStruct::CaptData(const unsigned num,unsigned p) {
     unsigned i, j;
 
     stringstream ss;
@@ -221,24 +224,24 @@ void MyStruct::FreeStructData() {
     delete [] data;
 }
 
-void MyStruct::operator =(MyStruct const &other) {
+void MyStruct::operator = (MyStruct const &other){
     unsigned i, j;
     if (&other == this || data == NULL || other.data == NULL || other.nx != nx || other.ny != ny)
         return;
-    for (i = 0; i < nx; i++) {
-        for (j = 0; j < ny; j++) {
+	for (i = 0; i < nx; i++){
+		for (j = 0; j < ny; j++){
             data[i][j] = other.data[i][j];
-        }
-    }
+		}
+	}
 }
 
 void MyStruct::InitStructData(MyDataF initVal) {
     unsigned i, j;
-    for (i = 0; i < nx; i++) {
-        for (j = 0; j < ny; j++) {
+	for (i = 0; i < nx; i++){
+		for (j = 0; j < ny; j++){
             data[i][j] = initVal;
-        }
-    }
+		}
+	}
 }
 
 void MyStruct::SaveData(unsigned leap) {
@@ -268,7 +271,7 @@ int MyStruct::InitMatlabEngine() {
         cerr << "Can't start matlab engine!" << endl;
         exit(-1);
     }
-    engSetVisible(ep, 1);
+    engSetVisible (ep,1);
 #endif
     return 0;
 
@@ -301,11 +304,11 @@ void MyStruct::PlotArrays() {
 
 #ifdef MATLAB_SIMULATION
     MyDataF *pData = (MyDataF*) malloc(nx * ny * sizeof (MyDataF));
-    for (unsigned i = 0; i < nx; i++) {
-        for (unsigned j = 0; j < ny; j++) {
+	for (unsigned i = 0; i < nx; i++){
+		for (unsigned j = 0; j < ny; j++){
             pData[i * ny + j] = data[i][j];
-        }
-    }
+		}
+	}
     engPutVariable(ep, "ind", num);
     engEvalString(ep, "ind=int32(ind);");
     memcpy(mxGetPr(MyArray), pData, nx * ny * sizeof (MyDataF));
@@ -334,11 +337,11 @@ void MyStruct::InitPlot() {
     engPutVariable(ep, "name", mxStr);
     engEvalString(ep, "obj(ind).name=name;");
 
-    for (unsigned i = 0; i < nx; i++) {
-        for (unsigned j = 0; j < ny; j++) {
+	for (unsigned i = 0; i < nx; i++){
+		for (unsigned j = 0; j < ny; j++){
             pData[i * ny + j] = data[i][j];
-        }
-    }
+		}
+	}
     memcpy(mxGetPr(MyArray), pData, nx * ny * sizeof (MyDataF));
     engPutVariable(ep, "array", MyArray);
 
